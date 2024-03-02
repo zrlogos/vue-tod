@@ -1,0 +1,329 @@
+<html lang="zh-Hans" data-n-head="">
+<head>
+    <meta charset="UTF-8">
+
+
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            line-height: 1.8
+        }
+
+        blockquote, body, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
+            font-family: "PingFang SC", "Microsoft YaHei", "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif !important
+        }
+
+
+        a {
+            color: #333;
+            text-decoration: none
+        }
+
+        .index-line-widget {
+            font-size: 14px;
+            background-image: url(//cdnwww.mtr.bj.cn/bjmtr/default/kmICQA_lgCQkmyWEzCqMB.png);
+            background-size: 100% 100%;
+            background-position: top;
+            background-repeat: no-repeat;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            box-sizing: border-box;
+            padding: 100px 20px 20px
+        }
+
+        .index-line-widget::-webkit-scrollbar {
+            width: 4px;
+            height: 4px
+        }
+
+        .index-line-widget::-webkit-scrollbar-track {
+            background: #eee
+        }
+
+        .index-line-widget::-webkit-scrollbar-thumb {
+            background: #a02f42
+        }
+
+        .index-line-widget .line {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+            border-top: 2px solid #fff;
+            min-height: calc(10em + 40px)
+        }
+
+        .index-line-widget .line .station {
+            width: 19px;
+            text-align: center;
+            position: relative
+        }
+
+        .index-line-widget .line .station:not(:last-child):after {
+            content: "";
+            display: block;
+            height: 2px;
+            background-color: currentColor;
+            width: 45px;
+            position: absolute;
+            top: -2px;
+            left: 9px;
+            z-index: 1
+        }
+
+        .index-line-widget .line .station.not-connected:after {
+            background-color: #ccc
+        }
+
+        .index-line-widget .line .station:first-child {
+            margin-left: -9px
+        }
+
+        .index-line-widget .line .station:last-child {
+            margin-right: -9px
+        }
+
+        .index-line-widget .line .station a, .index-line-widget .line .station span {
+            margin-top: 1em;
+            line-height: 1;
+            -webkit-writing-mode: vertical-lr;
+            -ms-writing-mode: tb-lr;
+            writing-mode: vertical-lr
+        }
+
+        .index-line-widget .line .station a.not-open, .index-line-widget .line .station span.not-open {
+            color: #999
+        }
+
+        .index-line-widget .line .station .circle {
+            color: currentColor !important;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 2px solid;
+            position: absolute;
+            left: 0;
+            top: -11px;
+            z-index: 2;
+            margin-top: 0
+        }
+
+        .index-line-widget .line .station .circle i {
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            font-size: 12px
+        }
+
+        .index-line-widget .line .station:hover a {
+            color: #a02f42 !important
+        }
+
+        .index-line-widget .line .station:hover .circle {
+            border-color: #a02f42 !important
+        }
+
+        .index-line-widget .line .station:hover .circle i {
+            color: #a02f42 !important
+        }
+
+        .index-line-widget .transfer-wrapper {
+            position: absolute;
+            z-index: 1;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex
+        }
+
+        .index-line-widget .transfer-wrapper .transfer-line {
+            background-color: #ccc;
+            width: 9px;
+            height: 25px;
+            border-radius: 5px
+        }
+
+        .index-line-widget .transfer-name {
+            position: absolute;
+            z-index: 1;
+            top: -70px;
+            line-height: 1.2em;
+            font-size: .8em;
+            left: 50%;
+            transform: translateX(-50%)
+        }
+
+        .index-line-widget .transfer-name .line-label {
+            margin: 0 auto;
+            -webkit-writing-mode: vertical-lr;
+            -ms-writing-mode: tb-lr;
+            writing-mode: vertical-lr
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+<div class="index-line-widget">
+    <div class="line" style="color:#009693;width:1400px;">
+        <div class="station"><a class="circle"></a>
+            <a>安河桥北</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>北宫门</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#93AE58;"></div>
+            </div>
+            <div class="transfer-name" style="color:#93AE58;">
+                <div>16</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>西苑</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>圆明园</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>北京大学东门</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>中关村</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#009bc1;"></div>
+            </div>
+            <div class="transfer-name" style="color:#009bc1;">
+                <div>10</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>海淀黄庄</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>人民大学</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>魏公村</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#92bf1e;"></div>
+                <div class="transfer-line" style="background-color:#93AE58;"></div>
+            </div>
+            <div class="transfer-name" style="color:#92bf1e;">
+                <div>9/16</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>国家图书馆</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>动物园</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#156097;"></div>
+                <div class="transfer-line" style="background-color:#f6e614;"></div>
+            </div>
+            <div class="transfer-name" style="color:#156097;">
+                <div>2/13</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>西直门</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>新街口</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#d19708;"></div>
+                <div class="transfer-line" style="background-color:#d6abc1;"></div>
+            </div>
+            <div class="transfer-name" style="color:#d19708;">
+                <div>6/19</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>平安里</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>西四</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>灵境胡同</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#c23931;"></div>
+            </div>
+            <div class="transfer-name" style="color:#c23931;">
+                <div>1</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>西单</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#156097;"></div>
+            </div>
+            <div class="transfer-name" style="color:#156097;">
+                <div>2</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>宣武门</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#f2c172;"></div>
+            </div>
+            <div class="transfer-name" style="color:#f2c172;">
+                <div>7</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>菜市口</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>陶然亭</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#D8B9B3;"></div>
+            </div>
+            <div class="transfer-name" style="color:#D8B9B3;">
+                <div>14</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>北京南站</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>马家堡</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#009bc1;"></div>
+            </div>
+            <div class="transfer-name" style="color:#009bc1;">
+                <div>10</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>角门西</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>公益西桥</a></div>
+        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <div class="transfer-wrapper">
+                <div class="transfer-line" style="background-color:#d6abc1;"></div>
+            </div>
+            <div class="transfer-name" style="color:#d6abc1;">
+                <div>19</div>
+                <div class="line-label">号线</div>
+            </div>
+            <a>新宫</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>西红门</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>高米店北</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>高米店南</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>枣园</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>清源路</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>黄村西大街</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>黄村火车站</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>义和庄</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>生物医药基地</a></div>
+        <div class="station"><a class="circle"></a>
+            <a>天宫院</a></div>
+    </div>
+</div>
+
+
+</body>
+</html>
