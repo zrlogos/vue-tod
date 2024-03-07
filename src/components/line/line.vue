@@ -19,8 +19,8 @@ export default {
 <template>
   <div>
 <!--    <time_line/>-->
-    <drawer/>
-    <gram/>
+<!--    <drawer/>-->
+<!--    <gram/>-->
     <fourth/>
   </div>
 

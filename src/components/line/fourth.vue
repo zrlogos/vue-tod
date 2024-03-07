@@ -1,10 +1,138 @@
 <script>
+import {Back, Right} from "@element-plus/icons";
+import $ from 'jquery';
+import {Search} from "@element-plus/icons-vue";
+
 export default {
-  name: "fourth"
+  name: "fourth",
+
+
+  computed: {
+    Search() {
+      return Search
+    },
+    Back() {
+      return Back
+    },
+    Right() {
+      return Right
+    },
+
+  },
+
+
+  data() {
+    return {
+      drawer:false,
+      percentage1: 10,
+      percentage2: 20,
+      percentage3: 80,
+      percentage4: 60,
+
+
+      stations: [
+        ["安河桥北", "北宫门", "西苑", "圆明园", "北京大学东门"],
+        ["中关村", "海淀黄庄", "人民大学", "魏公村", "国家图书馆",],
+        ["动物园", "西直门", "新街口", "平安里", "西四"],
+        ["灵境胡同", "西单", "宣武门", "菜市口", "陶然亭",],
+        ["北京南站", "马家堡", "角门西", "公益西桥", "新宫",],
+        ["西红门", "高米店北", "高米店南", "枣园", "清源路",],
+        ["黄村西大街", "黄村火车站", "义和庄", "生物医药基地", "天宫院"],
+      ],
+
+      scores: [
+        [10, 20, 30, 40],
+        [30, 50, 30, 40],
+        [40, 30, 30, 40],
+        [50, 60, 30, 40],
+        [80, 80, 30, 40],
+        [90, 10, 30, 40],
+        [70, 90, 30, 40],
+      ],
+
+      index: 0,
+    };
+  },
+
+
+  methods: {
+
+
+    handleNext() {
+      $("div.station a").css('background-color', '');
+      for (let i = 0; i < this.stations[this.index].length; i++) {
+        let stationName = this.stations[this.index][i];
+        $("div.station:contains('" + stationName + "') a").css('background-color', 'yellow');
+      }
+
+
+      //
+      this.percentage1 = this.scores[this.index][0]
+      this.percentage2 = this.scores[this.index][1]
+      this.percentage3 = this.scores[this.index][2]
+      this.percentage4 = this.scores[this.index][3]
+      this.index = (this.index + 1) % this.stations.length
+
+
+    },
+
+
+    handleBack() {
+      $("div.station a").css('background-color', '');
+      if (this.index > 0) this.index--
+      for (let i = 0; i < this.stations[this.index].length; i++) {
+        let stationName = this.stations[this.index][i];
+        $("div.station:contains('" + stationName + "') a").css('background-color', 'yellow');
+      }
+    },
+
+  }
 }
 </script>
 
 <template>
+
+
+
+  <div class="demo-progress">
+    <el-progress :percentage="percentage1" :stroke-width="24" :color="'#d91616'" striped striped-flow>
+      <span class="custom-content">功能互补: {{ percentage1 }}</span>
+    </el-progress>
+    <el-progress :percentage="percentage2" :stroke-width="24" :color="'#16d995'" striped striped-flow>
+      <span class="custom-content">交通协同: {{ percentage2}}</span>
+    </el-progress>
+    <el-progress :percentage="percentage3" :stroke-width="24" :color="'#b516d9'" striped striped-flow>
+      <span class="custom-content">经济效应: {{ percentage3 }}</span>
+    </el-progress>
+    <el-progress :percentage="percentage4" :stroke-width="24" :color="'#335fbd'" striped striped-flow>
+      <span class="custom-content">综合评价: {{ percentage4 }}</span>
+    </el-progress>
+
+
+  </div>
+  <div>
+
+
+    <el-tooltip content="上一个" placement="top" size="medium">
+    <el-button color="#009693" size="large" :icon="Back" circle @click="handleBack"/>
+    </el-tooltip>
+
+    <el-tooltip content="下一个" placement="top">
+    <el-button color="#009693" size="large" :icon="Right" circle @click="handleNext"/>
+    </el-tooltip>
+
+    <el-tooltip content="更多信息" placement="top">
+    <el-button type="primary" color="#009693" size="large" :icon="Search" circle @click="drawer = true">
+
+    </el-button>
+    </el-tooltip>
+
+    <el-drawer v-model="drawer"  :with-header="false">
+      <span>廊道TOD</span>
+    </el-drawer>
+
+
+  </div>
   <div class="index-line-widget">
     <div class="line" style="color:#009693;width:1400px;">
       <div class="station"><a class="circle"></a>
@@ -163,8 +291,6 @@ export default {
 
 <style scoped>
 
-
-
 blockquote, body, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
   font-family: "PingFang SC", "Microsoft YaHei", "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif !important
 }
@@ -176,7 +302,7 @@ a {
 }
 
 .index-line-widget {
-  font-size: 14px;
+  font-size: 18px;
   background-image: url(//cdnwww.mtr.bj.cn/bjmtr/default/kmICQA_lgCQkmyWEzCqMB.png);
   background-size: 100% 100%;
   background-position: top;
@@ -315,6 +441,11 @@ a {
   -webkit-writing-mode: vertical-lr;
   -ms-writing-mode: tb-lr;
   writing-mode: vertical-lr
+}
+
+.demo-progress .el-progress--line {
+  margin-bottom: 15px;
+  max-width: 600px;
 }
 
 
