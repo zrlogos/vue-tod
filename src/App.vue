@@ -1,17 +1,7 @@
 <script>
 
-import PointInfo from '@/components/map/pointInfo.vue'
-import BeijingSubway from "@/components/subway/beijngSubway.vue";
-
-export default {
-
-  components: {
-    PointInfo,
-    BeijingSubway
-  },
 
 
-}
 </script>
 
 

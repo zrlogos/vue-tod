@@ -1,11 +1,14 @@
 <script>
-import {Back, Right} from "@element-plus/icons";
+import {Back, Right,Search} from "@element-plus/icons";
 import $ from 'jquery';
-import {Search} from "@element-plus/icons-vue";
+import intro from "./intro.vue"
 
 export default {
   name: "fourth",
 
+  components:{
+    intro,
+  },
 
   computed: {
     Search() {
@@ -24,10 +27,10 @@ export default {
   data() {
     return {
       drawer:false,
-      percentage1: 10,
-      percentage2: 20,
-      percentage3: 80,
-      percentage4: 60,
+      percentage1: 0,
+      percentage2: 0,
+      percentage3: 0,
+      percentage4: 0,
 
 
       stations: [
@@ -42,15 +45,15 @@ export default {
 
       scores: [
         [10, 20, 30, 40],
-        [30, 50, 30, 40],
-        [40, 30, 30, 40],
-        [50, 60, 30, 40],
-        [80, 80, 30, 40],
-        [90, 10, 30, 40],
-        [70, 90, 30, 40],
+        [30, 50, 60, 90],
+        [40, 30, 80, 60],
+        [50, 60, 30, 30],
+        [80, 80, 70, 20],
+        [90, 10, 20, 10],
+        [70, 90, 30, 80],
       ],
 
-      index: 0,
+      index: -1,
     };
   },
 
@@ -59,31 +62,52 @@ export default {
 
 
     handleNext() {
-      $("div.station a").css('background-color', '');
+      $("div.station a").css('color', '');
+      $("div.station a.circle").css('background-color', '');
+      this.index = (this.index + 1) % this.stations.length
       for (let i = 0; i < this.stations[this.index].length; i++) {
         let stationName = this.stations[this.index][i];
-        $("div.station:contains('" + stationName + "') a").css('background-color', 'yellow');
+        $("div.station:contains('" + stationName + "') a").css('color', 'red');
+        $("div.station:contains('" + stationName + "') a.circle").css('background-color', 'rgb(255,192,203)');
+
       }
 
-
-      //
       this.percentage1 = this.scores[this.index][0]
       this.percentage2 = this.scores[this.index][1]
       this.percentage3 = this.scores[this.index][2]
       this.percentage4 = this.scores[this.index][3]
-      this.index = (this.index + 1) % this.stations.length
+
 
 
     },
 
 
     handleBack() {
-      $("div.station a").css('background-color', '');
-      if (this.index > 0) this.index--
-      for (let i = 0; i < this.stations[this.index].length; i++) {
-        let stationName = this.stations[this.index][i];
-        $("div.station:contains('" + stationName + "') a").css('background-color', 'yellow');
+
+      $("div.station a").css('color', '');
+      $("div.station a.circle").css('background-color', '');
+      if (this.index >= 0) this.index--
+
+      if(this.index===-1){
+        this.percentage1 = 0
+        this.percentage2 = 0
+        this.percentage3 = 0
+        this.percentage4 = 0
+      }else {
+        for (let i = 0; i < this.stations[this.index].length; i++) {
+          let stationName = this.stations[this.index][i];
+          $("div.station:contains('" + stationName + "') a").css('color', 'red');
+          $("div.station:contains('" + stationName + "') a.circle").css('background-color', 'rgb(255,192,203)');
+
+
+        }
+        this.percentage1 = this.scores[this.index][0]
+        this.percentage2 = this.scores[this.index][1]
+        this.percentage3 = this.scores[this.index][2]
+        this.percentage4 = this.scores[this.index][3]
       }
+
+
     },
 
   }
@@ -93,47 +117,45 @@ export default {
 <template>
 
 
+  <div class="info">
 
-  <div class="demo-progress">
-    <el-progress :percentage="percentage1" :stroke-width="24" :color="'#d91616'" striped striped-flow>
-      <span class="custom-content">功能互补: {{ percentage1 }}</span>
-    </el-progress>
-    <el-progress :percentage="percentage2" :stroke-width="24" :color="'#16d995'" striped striped-flow>
-      <span class="custom-content">交通协同: {{ percentage2}}</span>
-    </el-progress>
-    <el-progress :percentage="percentage3" :stroke-width="24" :color="'#b516d9'" striped striped-flow>
-      <span class="custom-content">经济效应: {{ percentage3 }}</span>
-    </el-progress>
-    <el-progress :percentage="percentage4" :stroke-width="24" :color="'#335fbd'" striped striped-flow>
-      <span class="custom-content">综合评价: {{ percentage4 }}</span>
-    </el-progress>
+    <intro/>
+    <el-card style="width: 800px;margin-left: 30px " >
+      <template #default>
+        <div class="demo-progress">
+          <el-progress :percentage="percentage1" :stroke-width="24" :color="'#d91616'" striped striped-flow>
+            <span class="custom-content">&nbsp  &nbsp 功能互补:  {{ percentage1 }}</span>
+          </el-progress>
+          <el-progress :percentage="percentage2" :stroke-width="24" :color="'#16d995'" striped striped-flow>
+            <span class="custom-content">&nbsp &nbsp   交通协同:  {{ percentage2}}</span>
+          </el-progress>
+          <el-progress :percentage="percentage3" :stroke-width="24" :color="'#b516d9'" striped striped-flow>
+            <span class="custom-content"> &nbsp  &nbsp 经济效应:  {{ percentage3 }}</span>
+          </el-progress>
+          <el-progress :percentage="percentage4" :stroke-width="24" :color="'#335fbd'" striped striped-flow>
+            <span class="custom-content"> &nbsp &nbsp 综合评价:  {{ percentage4 }}</span>
+          </el-progress>
+        </div>
 
-
+        <div class="button-sets">
+          <el-tooltip content="上一个" placement="top" size="medium">
+            <el-button color="#009693" size="large" :icon="Back" circle @click="handleBack"/>
+          </el-tooltip>
+          <el-tooltip content="下一个" placement="top">
+            <el-button color="#009693" size="large" :icon="Right" circle @click="handleNext"/>
+          </el-tooltip>
+          <el-tooltip content="更多信息" placement="top">
+            <el-button type="primary" color="#009693" size="large" :icon="Search" circle @click="drawer = true">
+            </el-button>
+          </el-tooltip>
+          <el-drawer v-model="drawer"  :with-header="false">
+            <span>廊道TOD</span>
+          </el-drawer>
+        </div>
+      </template>
+    </el-card>
   </div>
-  <div>
-
-
-    <el-tooltip content="上一个" placement="top" size="medium">
-    <el-button color="#009693" size="large" :icon="Back" circle @click="handleBack"/>
-    </el-tooltip>
-
-    <el-tooltip content="下一个" placement="top">
-    <el-button color="#009693" size="large" :icon="Right" circle @click="handleNext"/>
-    </el-tooltip>
-
-    <el-tooltip content="更多信息" placement="top">
-    <el-button type="primary" color="#009693" size="large" :icon="Search" circle @click="drawer = true">
-
-    </el-button>
-    </el-tooltip>
-
-    <el-drawer v-model="drawer"  :with-header="false">
-      <span>廊道TOD</span>
-    </el-drawer>
-
-
-  </div>
-  <div class="index-line-widget">
+  <div class="line-item">
     <div class="line" style="color:#009693;width:1400px;">
       <div class="station"><a class="circle"></a>
         <a>安河桥北</a></div>
@@ -290,18 +312,16 @@ export default {
 </template>
 
 <style scoped>
-
-blockquote, body, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
-  font-family: "PingFang SC", "Microsoft YaHei", "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif !important
+.info{
+  display: flex;
+  flex: 1
 }
-
-
 a {
   color: #333;
   text-decoration: none
 }
 
-.index-line-widget {
+.line-item {
   font-size: 18px;
   background-image: url(//cdnwww.mtr.bj.cn/bjmtr/default/kmICQA_lgCQkmyWEzCqMB.png);
   background-size: 100% 100%;
@@ -314,20 +334,20 @@ a {
   padding: 100px 20px 20px
 }
 
-.index-line-widget::-webkit-scrollbar {
+.line-item::-webkit-scrollbar {
   width: 4px;
   height: 4px
 }
 
-.index-line-widget::-webkit-scrollbar-track {
+.line-item::-webkit-scrollbar-track {
   background: #eee
 }
 
-.index-line-widget::-webkit-scrollbar-thumb {
+.line-item::-webkit-scrollbar-thumb {
   background: #a02f42
 }
 
-.index-line-widget .line {
+.line-item .line {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
@@ -335,13 +355,13 @@ a {
   min-height: calc(10em + 40px)
 }
 
-.index-line-widget .line .station {
+.line-item .line .station {
   width: 19px;
   text-align: center;
   position: relative
 }
 
-.index-line-widget .line .station:not(:last-child):after {
+.line-item .line .station:not(:last-child):after {
   content: "";
   display: block;
   height: 2px;
@@ -353,19 +373,19 @@ a {
   z-index: 1
 }
 
-.index-line-widget .line .station.not-connected:after {
+.line-item .line .station.not-connected:after {
   background-color: #ccc
 }
 
-.index-line-widget .line .station:first-child {
+.line-item .line .station:first-child {
   margin-left: -9px
 }
 
-.index-line-widget .line .station:last-child {
+.line-item .line .station:last-child {
   margin-right: -9px
 }
 
-.index-line-widget .line .station a, .index-line-widget .line .station span {
+.line-item .line .station a, .line-item .line .station span {
   margin-top: 1em;
   line-height: 1;
   -webkit-writing-mode: vertical-lr;
@@ -373,11 +393,11 @@ a {
   writing-mode: vertical-lr
 }
 
-.index-line-widget .line .station a.not-open, .index-line-widget .line .station span.not-open {
+.line-item .line .station a.not-open, .line-item .line .station span.not-open {
   color: #999
 }
 
-.index-line-widget .line .station .circle {
+.line-item .line .station .circle {
   color: currentColor !important;
   width: 16px;
   height: 16px;
@@ -391,26 +411,26 @@ a {
   margin-top: 0
 }
 
-.index-line-widget .line .station .circle i {
+.line-item .line .station .circle i {
   position: absolute;
   left: 2px;
   top: 2px;
   font-size: 12px
 }
 
-.index-line-widget .line .station:hover a {
+.line-item .line .station:hover a {
   color: #a02f42 !important
 }
 
-.index-line-widget .line .station:hover .circle {
+.line-item .line .station:hover .circle {
   border-color: #a02f42 !important
 }
 
-.index-line-widget .line .station:hover .circle i {
+.line-item .line .station:hover .circle i {
   color: #a02f42 !important
 }
 
-.index-line-widget .transfer-wrapper {
+.line-item .transfer-wrapper {
   position: absolute;
   z-index: 1;
   top: -25px;
@@ -419,14 +439,14 @@ a {
   display: flex
 }
 
-.index-line-widget .transfer-wrapper .transfer-line {
+.line-item .transfer-wrapper .transfer-line {
   background-color: #ccc;
   width: 9px;
   height: 25px;
   border-radius: 5px
 }
 
-.index-line-widget .transfer-name {
+.line-item .transfer-name {
   position: absolute;
   z-index: 1;
   top: -70px;
@@ -436,16 +456,28 @@ a {
   transform: translateX(-50%)
 }
 
-.index-line-widget .transfer-name .line-label {
+.line-item .transfer-name .line-label {
   margin: 0 auto;
   -webkit-writing-mode: vertical-lr;
   -ms-writing-mode: tb-lr;
   writing-mode: vertical-lr
 }
 
+.demo-progress{
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
 .demo-progress .el-progress--line {
+  width: 100%;
   margin-bottom: 15px;
   max-width: 600px;
+}
+.demo-progress .custom-content{
+
+  font-size: medium;
+  font-weight: bolder;
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+
 }
 
 

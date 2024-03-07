@@ -1,4 +1,4 @@
-let str = "<div class=\"index-line-widget\">\n" +
+let str = "<div class=\"line-item\">\n" +
     "    <div class=\"line\" style=\"color:#009693;width:1400px;\">\n" +
     "        <div class=\"station\"><a class=\"circle\"><!----></a>\n" +
     "            <!----> <a>安河桥北</a></div> <!---->\n" +

@@ -21,7 +21,7 @@
             text-decoration: none
         }
 
-        .index-line-widget {
+        .line-item {
             font-size: 14px;
             background-image: url(//cdnwww.mtr.bj.cn/bjmtr/default/kmICQA_lgCQkmyWEzCqMB.png);
             background-size: 100% 100%;
@@ -34,20 +34,20 @@
             padding: 100px 20px 20px
         }
 
-        .index-line-widget::-webkit-scrollbar {
+        .line-item::-webkit-scrollbar {
             width: 4px;
             height: 4px
         }
 
-        .index-line-widget::-webkit-scrollbar-track {
+        .line-item::-webkit-scrollbar-track {
             background: #eee
         }
 
-        .index-line-widget::-webkit-scrollbar-thumb {
+        .line-item::-webkit-scrollbar-thumb {
             background: #a02f42
         }
 
-        .index-line-widget .line {
+        .line-item .line {
             display: flex;
             justify-content: space-between;
             margin: 0 auto;
@@ -55,13 +55,13 @@
             min-height: calc(10em + 40px)
         }
 
-        .index-line-widget .line .station {
+        .line-item .line .station {
             width: 19px;
             text-align: center;
             position: relative
         }
 
-        .index-line-widget .line .station:not(:last-child):after {
+        .line-item .line .station:not(:last-child):after {
             content: "";
             display: block;
             height: 2px;
@@ -73,19 +73,19 @@
             z-index: 1
         }
 
-        .index-line-widget .line .station.not-connected:after {
+        .line-item .line .station.not-connected:after {
             background-color: #ccc
         }
 
-        .index-line-widget .line .station:first-child {
+        .line-item .line .station:first-child {
             margin-left: -9px
         }
 
-        .index-line-widget .line .station:last-child {
+        .line-item .line .station:last-child {
             margin-right: -9px
         }
 
-        .index-line-widget .line .station a, .index-line-widget .line .station span {
+        .line-item .line .station a, .line-item .line .station span {
             margin-top: 1em;
             line-height: 1;
             -webkit-writing-mode: vertical-lr;
@@ -93,11 +93,11 @@
             writing-mode: vertical-lr
         }
 
-        .index-line-widget .line .station a.not-open, .index-line-widget .line .station span.not-open {
+        .line-item .line .station a.not-open, .line-item .line .station span.not-open {
             color: #999
         }
 
-        .index-line-widget .line .station .circle {
+        .line-item .line .station .circle {
             color: currentColor !important;
             width: 16px;
             height: 16px;
@@ -111,26 +111,26 @@
             margin-top: 0
         }
 
-        .index-line-widget .line .station .circle i {
+        .line-item .line .station .circle i {
             position: absolute;
             left: 2px;
             top: 2px;
             font-size: 12px
         }
 
-        .index-line-widget .line .station:hover a {
+        .line-item .line .station:hover a {
             color: #a02f42 !important
         }
 
-        .index-line-widget .line .station:hover .circle {
+        .line-item .line .station:hover .circle {
             border-color: #a02f42 !important
         }
 
-        .index-line-widget .line .station:hover .circle i {
+        .line-item .line .station:hover .circle i {
             color: #a02f42 !important
         }
 
-        .index-line-widget .transfer-wrapper {
+        .line-item .transfer-wrapper {
             position: absolute;
             z-index: 1;
             top: -25px;
@@ -139,14 +139,14 @@
             display: flex
         }
 
-        .index-line-widget .transfer-wrapper .transfer-line {
+        .line-item .transfer-wrapper .transfer-line {
             background-color: #ccc;
             width: 9px;
             height: 25px;
             border-radius: 5px
         }
 
-        .index-line-widget .transfer-name {
+        .line-item .transfer-name {
             position: absolute;
             z-index: 1;
             top: -70px;
@@ -156,7 +156,7 @@
             transform: translateX(-50%)
         }
 
-        .index-line-widget .transfer-name .line-label {
+        .line-item .transfer-name .line-label {
             margin: 0 auto;
             -webkit-writing-mode: vertical-lr;
             -ms-writing-mode: tb-lr;

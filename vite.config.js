@@ -9,13 +9,4 @@ export default defineConfig({
             '@': '/src'
         },
     },
-    server: {
-        proxy: {
-            '/apis': {
-                target: 'https://map.bjsubway.com/',
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/apis/, ''),
-            },
-        },
-    },
 });
