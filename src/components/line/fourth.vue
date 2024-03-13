@@ -33,7 +33,7 @@ export default {
       percentage4: 0,
 
 
-      stations: [
+      tods: [
         ["安河桥北", "北宫门", "西苑", "圆明园", "北京大学东门"],
         ["中关村", "海淀黄庄", "人民大学", "魏公村", "国家图书馆",],
         ["动物园", "西直门", "新街口", "平安里", "西四"],
@@ -52,6 +52,44 @@ export default {
         [90, 10, 20, 10],
         [70, 90, 30, 80],
       ],
+      stations: [
+      { name: '安河桥北', transfer: false },
+      { name: '北宫门', transfer: false },
+      { name: '西苑', transfer: true, lines: '16', colors: ['#93AE58'] },
+      { name: '圆明园', transfer: false },
+      { name: '北京大学东门', transfer: false },
+      { name: '中关村', transfer: false },
+      { name: '海淀黄庄', transfer: true, lines: '10', colors: ['#009bc1'] },
+      { name: '人民大学', transfer: false },
+      { name: '魏公村', transfer: false },
+      { name: '国家图书馆', transfer: true, lines: '9/16', colors: ['#92bf1e', '#93AE58'] },
+      { name: '动物园', transfer: false },
+      { name: '西直门', transfer: true, lines: '2/13', colors: ['#156097', '#f6e614'] },
+      { name: '新街口', transfer: false },
+      { name: '平安里', transfer: true, lines: '6/19', colors: ['#d19708', '#d6abc1'] },
+      { name: '西四', transfer: false },
+      { name: '灵境胡同', transfer: false },
+      { name: '西单', transfer: true, lines: '1', colors: ['#c23931'] },
+      { name: '宣武门', transfer: true, lines: '2', colors: ['#156097'] },
+      { name: '菜市口', transfer: true, lines: '7', colors: ['#f2c172'] },
+      { name: '陶然亭', transfer: false },
+      { name: '北京南站', transfer: true, lines: '14', colors: ['#D8B9B3'] },
+      { name: '马家堡', transfer: false },
+      { name: '角门西', transfer: true, lines: '10', colors: ['#009bc1'] },
+      { name: '公益西桥', transfer: false },
+      { name: '新宫', transfer: true, lines: '19', colors: ['#d6abc1'] },
+      { name: '西红门', transfer: false },
+      { name: '高米店北', transfer: false },
+      { name: '高米店南', transfer: false },
+      { name: '枣园', transfer: false },
+      { name: '清源路', transfer: false },
+      { name: '黄村西大街', transfer: false },
+      { name: '黄村火车站', transfer: false },
+      { name: '义和庄', transfer: false },
+      { name: '生物医药基地', transfer: false },
+      { name: '天宫院', transfer: false }
+],
+
 
       index: -1,
     };
@@ -64,9 +102,9 @@ export default {
     handleNext() {
       $("div.station a").css('color', '');
       $("div.station a.circle").css('background-color', '');
-      this.index = (this.index + 1) % this.stations.length
-      for (let i = 0; i < this.stations[this.index].length; i++) {
-        let stationName = this.stations[this.index][i];
+      this.index = (this.index + 1) % this.tods.length
+      for (let i = 0; i < this.tods[this.index].length; i++) {
+        let stationName = this.tods[this.index][i];
         $("div.station:contains('" + stationName + "') a").css('color', 'red');
         $("div.station:contains('" + stationName + "') a.circle").css('background-color', 'rgb(255,192,203)');
 
@@ -94,8 +132,8 @@ export default {
         this.percentage3 = 0
         this.percentage4 = 0
       }else {
-        for (let i = 0; i < this.stations[this.index].length; i++) {
-          let stationName = this.stations[this.index][i];
+        for (let i = 0; i < this.tods[this.index].length; i++) {
+          let stationName = this.tods[this.index][i];
           $("div.station:contains('" + stationName + "') a").css('color', 'red');
           $("div.station:contains('" + stationName + "') a.circle").css('background-color', 'rgb(255,192,203)');
 
@@ -156,157 +194,19 @@ export default {
     </el-card>
   </div>
   <div class="line-item">
-    <div class="line" style="color:#009693;width:1400px;">
-      <div class="station"><a class="circle"></a>
-        <a>安河桥北</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>北宫门</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#93AE58;"></div>
+    <div class="line" style="color:#009693;">
+      <div v-for="station in stations" :key="station.name" class="station">
+        <a v-if="station.transfer" class="circle"><i class="icofont-ui-rotation"></i></a>
+        <a v-else class="circle"></a>
+        <div v-if="station.transfer" class="transfer-wrapper">
+          <div v-for="color in station.colors" class="transfer-line" :style="{ 'background-color': color }"></div>
         </div>
-        <div class="transfer-name" style="color:#93AE58;">
-          <div>16</div>
+        <div class="transfer-name" v-if="station.transfer" :style="{ 'color': station.colors[0] }">
+          <div>{{ station.lines }}</div>
           <div class="line-label">号线</div>
         </div>
-        <a>西苑</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>圆明园</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>北京大学东门</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>中关村</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#009bc1;"></div>
-        </div>
-        <div class="transfer-name" style="color:#009bc1;">
-          <div>10</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>海淀黄庄</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>人民大学</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>魏公村</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#92bf1e;"></div>
-          <div class="transfer-line" style="background-color:#93AE58;"></div>
-        </div>
-        <div class="transfer-name" style="color:#92bf1e;">
-          <div>9/16</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>国家图书馆</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>动物园</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#156097;"></div>
-          <div class="transfer-line" style="background-color:#f6e614;"></div>
-        </div>
-        <div class="transfer-name" style="color:#156097;">
-          <div>2/13</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>西直门</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>新街口</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#d19708;"></div>
-          <div class="transfer-line" style="background-color:#d6abc1;"></div>
-        </div>
-        <div class="transfer-name" style="color:#d19708;">
-          <div>6/19</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>平安里</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>西四</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>灵境胡同</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#c23931;"></div>
-        </div>
-        <div class="transfer-name" style="color:#c23931;">
-          <div>1</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>西单</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#156097;"></div>
-        </div>
-        <div class="transfer-name" style="color:#156097;">
-          <div>2</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>宣武门</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#f2c172;"></div>
-        </div>
-        <div class="transfer-name" style="color:#f2c172;">
-          <div>7</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>菜市口</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>陶然亭</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#D8B9B3;"></div>
-        </div>
-        <div class="transfer-name" style="color:#D8B9B3;">
-          <div>14</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>北京南站</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>马家堡</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#009bc1;"></div>
-        </div>
-        <div class="transfer-name" style="color:#009bc1;">
-          <div>10</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>角门西</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>公益西桥</a></div>
-      <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-        <div class="transfer-wrapper">
-          <div class="transfer-line" style="background-color:#d6abc1;"></div>
-        </div>
-        <div class="transfer-name" style="color:#d6abc1;">
-          <div>19</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>新宫</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>西红门</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>高米店北</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>高米店南</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>枣园</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>清源路</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>黄村西大街</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>黄村火车站</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>义和庄</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>生物医药基地</a></div>
-      <div class="station"><a class="circle"></a>
-        <a>天宫院</a></div>
+        <a>{{ station.name }}</a>
+      </div>
     </div>
   </div>
 </template>

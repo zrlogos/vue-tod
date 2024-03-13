@@ -3,18 +3,11 @@
     <meta charset="UTF-8">
 
 
-
     <style>
-        body {
-            padding: 0;
-            margin: 0;
-            line-height: 1.8
+        .info {
+            display: flex;
+            flex: 1
         }
-
-        blockquote, body, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
-            font-family: "PingFang SC", "Microsoft YaHei", "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif !important
-        }
-
 
         a {
             color: #333;
@@ -22,7 +15,7 @@
         }
 
         .line-item {
-            font-size: 14px;
+            font-size: 18px;
             background-image: url(//cdnwww.mtr.bj.cn/bjmtr/default/kmICQA_lgCQkmyWEzCqMB.png);
             background-size: 100% 100%;
             background-position: top;
@@ -163,19 +156,46 @@
             writing-mode: vertical-lr
         }
 
+        .demo-progress {
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .demo-progress .el-progress--line {
+            width: 100%;
+            margin-bottom: 15px;
+            max-width: 600px;
+        }
+
+        .demo-progress .custom-content {
+
+            font-size: medium;
+            font-weight: bolder;
+            font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+
+        }
+
 
     </style>
 
 </head>
 
 <body>
-<div class="index-line-widget">
+<div class="line-item">
     <div class="line" style="color:#009693;width:1400px;">
-        <div class="station"><a class="circle"></a>
-            <a>安河桥北</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>北宫门</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+        <div class="station">
+            <a class="circle"></a>
+            <a>安河桥北</a>
+        </div>
+        <div class="station">
+            <a class="circle"></a>
+            <a>北宫门</a>
+        </div>
+
+        <div class="station">
+            <a class="circle">
+            <i class="icofont-ui-rotation"></i>
+            </a>
             <div class="transfer-wrapper">
                 <div class="transfer-line" style="background-color:#93AE58;"></div>
             </div>
@@ -183,7 +203,9 @@
                 <div>16</div>
                 <div class="line-label">号线</div>
             </div>
-            <a>西苑</a></div>
+            <a>西苑</a>
+        </div>
+
         <div class="station"><a class="circle"></a>
             <a>圆明园</a></div>
         <div class="station"><a class="circle"></a>
