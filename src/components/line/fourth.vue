@@ -2,12 +2,14 @@
 import {Back, Right,Search} from "@element-plus/icons";
 import $ from 'jquery';
 import intro from "./intro.vue"
+import tod_line from "@/components/line/tod_line.vue";
 
 export default {
   name: "fourth",
 
   components:{
     intro,
+    tod_line,
   },
 
   computed: {
@@ -89,9 +91,9 @@ export default {
       { name: '生物医药基地', transfer: false },
       { name: '天宫院', transfer: false }
 ],
-
-
       index: -1,
+
+
     };
   },
 
@@ -193,22 +195,7 @@ export default {
       </template>
     </el-card>
   </div>
-  <div class="line-item">
-    <div class="line" style="color:#009693;">
-      <div v-for="station in stations" :key="station.name" class="station">
-        <a v-if="station.transfer" class="circle"><i class="icofont-ui-rotation"></i></a>
-        <a v-else class="circle"></a>
-        <div v-if="station.transfer" class="transfer-wrapper">
-          <div v-for="color in station.colors" class="transfer-line" :style="{ 'background-color': color }"></div>
-        </div>
-        <div class="transfer-name" v-if="station.transfer" :style="{ 'color': station.colors[0] }">
-          <div>{{ station.lines }}</div>
-          <div class="line-label">号线</div>
-        </div>
-        <a>{{ station.name }}</a>
-      </div>
-    </div>
-  </div>
+  <tod_line/>
 </template>
 
 <style scoped>

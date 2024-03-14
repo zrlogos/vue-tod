@@ -1,351 +1,156 @@
 <html lang="zh-Hans" data-n-head="">
-<head>
-    <meta charset="UTF-8">
 
 
-    <style>
-        .info {
-            display: flex;
-            flex: 1
-        }
+<body data-n-head="">
 
-        a {
-            color: #333;
-            text-decoration: none
-        }
-
-        .line-item {
-            font-size: 18px;
-            background-image: url(//cdnwww.mtr.bj.cn/bjmtr/default/kmICQA_lgCQkmyWEzCqMB.png);
-            background-size: 100% 100%;
-            background-position: top;
-            background-repeat: no-repeat;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            box-sizing: border-box;
-            padding: 100px 20px 20px
-        }
-
-        .line-item::-webkit-scrollbar {
-            width: 4px;
-            height: 4px
-        }
-
-        .line-item::-webkit-scrollbar-track {
-            background: #eee
-        }
-
-        .line-item::-webkit-scrollbar-thumb {
-            background: #a02f42
-        }
-
-        .line-item .line {
-            display: flex;
-            justify-content: space-between;
-            margin: 0 auto;
-            border-top: 2px solid #fff;
-            min-height: calc(10em + 40px)
-        }
-
-        .line-item .line .station {
-            width: 19px;
-            text-align: center;
-            position: relative
-        }
-
-        .line-item .line .station:not(:last-child):after {
-            content: "";
-            display: block;
-            height: 2px;
-            background-color: currentColor;
-            width: 45px;
-            position: absolute;
-            top: -2px;
-            left: 9px;
-            z-index: 1
-        }
-
-        .line-item .line .station.not-connected:after {
-            background-color: #ccc
-        }
-
-        .line-item .line .station:first-child {
-            margin-left: -9px
-        }
-
-        .line-item .line .station:last-child {
-            margin-right: -9px
-        }
-
-        .line-item .line .station a, .line-item .line .station span {
-            margin-top: 1em;
-            line-height: 1;
-            -webkit-writing-mode: vertical-lr;
-            -ms-writing-mode: tb-lr;
-            writing-mode: vertical-lr
-        }
-
-        .line-item .line .station a.not-open, .line-item .line .station span.not-open {
-            color: #999
-        }
-
-        .line-item .line .station .circle {
-            color: currentColor !important;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: #fff;
-            border: 2px solid;
-            position: absolute;
-            left: 0;
-            top: -11px;
-            z-index: 2;
-            margin-top: 0
-        }
-
-        .line-item .line .station .circle i {
-            position: absolute;
-            left: 2px;
-            top: 2px;
-            font-size: 12px
-        }
-
-        .line-item .line .station:hover a {
-            color: #a02f42 !important
-        }
-
-        .line-item .line .station:hover .circle {
-            border-color: #a02f42 !important
-        }
-
-        .line-item .line .station:hover .circle i {
-            color: #a02f42 !important
-        }
-
-        .line-item .transfer-wrapper {
-            position: absolute;
-            z-index: 1;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex
-        }
-
-        .line-item .transfer-wrapper .transfer-line {
-            background-color: #ccc;
-            width: 9px;
-            height: 25px;
-            border-radius: 5px
-        }
-
-        .line-item .transfer-name {
-            position: absolute;
-            z-index: 1;
-            top: -70px;
-            line-height: 1.2em;
-            font-size: .8em;
-            left: 50%;
-            transform: translateX(-50%)
-        }
-
-        .line-item .transfer-name .line-label {
-            margin: 0 auto;
-            -webkit-writing-mode: vertical-lr;
-            -ms-writing-mode: tb-lr;
-            writing-mode: vertical-lr
-        }
-
-        .demo-progress {
-            margin-top: 10px;
-            margin-bottom: 30px;
-        }
-
-        .demo-progress .el-progress--line {
-            width: 100%;
-            margin-bottom: 15px;
-            max-width: 600px;
-        }
-
-        .demo-progress .custom-content {
-
-            font-size: medium;
-            font-weight: bolder;
-            font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
-
-        }
-
-
-    </style>
-
-</head>
-
-<body>
-<div class="line-item">
-    <div class="line" style="color:#009693;width:1400px;">
-        <div class="station">
-            <a class="circle"></a>
-            <a>安河桥北</a>
-        </div>
-        <div class="station">
-            <a class="circle"></a>
-            <a>北宫门</a>
-        </div>
-
-        <div class="station">
-            <a class="circle">
-            <i class="icofont-ui-rotation"></i>
-            </a>
+<div class="index-line-widget">
+    <div class="line" style="color: rgb(147, 174, 88); width: 1160px;">
+        <div class="station"><a href="/service/line/station/5d5a1291b1ea0278b8fffcfc.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5d5a1291b1ea0278b8fffcfc.html">北安河</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5d5a1291b1ea0278b8fffcfb.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5d5a1291b1ea0278b8fffcfb.html">温阳路</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5d5a1291b1ea0278b8fffcfa.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5d5a1291b1ea0278b8fffcfa.html">稻香湖路</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5d5a1291b1ea0278b8fffcf9.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5d5a1291b1ea0278b8fffcf9.html">屯佃</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5d5a1291b1ea0278b8fffcf8.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5d5a1291b1ea0278b8fffcf8.html">永丰</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5d5a1291b1ea0278b8fffcf7.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5d5a1291b1ea0278b8fffcf7.html">永丰南</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5d5a1291b1ea0278b8fffcf6.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5d5a1291b1ea0278b8fffcf6.html">西北旺</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5d5a1291b1ea0278b8fffcf5.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5d5a1291b1ea0278b8fffcf5.html">马连洼</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5d5a1291b1ea0278b8fffcf4.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5d5a1291b1ea0278b8fffcf4.html">农大南路</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5d5a1291b1ea0278b8fffcf3.html"
+                                class="circle"><i class="icofont-ui-rotation"></i></a>
             <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#93AE58;"></div>
+                <div class="transfer-line" style="background-color: rgb(0, 150, 147);"></div>
             </div>
-            <div class="transfer-name" style="color:#93AE58;">
-                <div>16</div>
+            <div class="transfer-name" style="color: rgb(0, 150, 147);">
+                <div>4</div>
                 <div class="line-label">号线</div>
             </div>
-            <a>西苑</a>
-        </div>
-
-        <div class="station"><a class="circle"></a>
-            <a>圆明园</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>北京大学东门</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>中关村</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <a href="/service/line/station/5d5a1291b1ea0278b8fffcf3.html">西苑</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5fed2f80b17a37c682d20aa0.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5fed2f80b17a37c682d20aa0.html">万泉河桥</a></div> <!---->
+        <div class="station"><a href="/service/line/station/6585078711244c4ae1b3a2cc.html"
+                                class="circle"><i class="icofont-ui-rotation"></i></a>
             <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#009bc1;"></div>
+                <div class="transfer-line" style="background-color: rgb(0, 155, 193);"></div>
             </div>
-            <div class="transfer-name" style="color:#009bc1;">
+            <div class="transfer-name" style="color: rgb(0, 155, 193);">
                 <div>10</div>
                 <div class="line-label">号线</div>
             </div>
-            <a>海淀黄庄</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>人民大学</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>魏公村</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <a href="/service/line/station/6585078711244c4ae1b3a2cc.html">苏州街</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5fed2ff0b17a37c682d20aa3.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5fed2ff0b17a37c682d20aa3.html">苏州桥</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5fed3064b17a37c682d20aa5.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5fed3064b17a37c682d20aa5.html">万寿寺</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5fed30f2b17a37c682d20aa7.html"
+                                class="circle"><i class="icofont-ui-rotation"></i></a>
             <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#92bf1e;"></div>
-                <div class="transfer-line" style="background-color:#93AE58;"></div>
+                <div class="transfer-line" style="background-color: rgb(0, 150, 147);"></div>
+                <div class="transfer-line" style="background-color: rgb(146, 191, 30);"></div>
             </div>
-            <div class="transfer-name" style="color:#92bf1e;">
-                <div>9/16</div>
+            <div class="transfer-name" style="color: rgb(0, 150, 147);">
+                <div>4/9</div>
                 <div class="line-label">号线</div>
             </div>
-            <a>国家图书馆</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>动物园</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <a href="/service/line/station/5fed30f2b17a37c682d20aa7.html">国家图书馆</a></div> <!---->
+        <div class="station"><a href="/service/line/station/641432779088860a952ad339.html"
+                                class="circle"><i class="icofont-ui-rotation"></i></a>
             <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#156097;"></div>
-                <div class="transfer-line" style="background-color:#f6e614;"></div>
+                <div class="transfer-line" style="background-color: rgb(209, 151, 8);"></div>
             </div>
-            <div class="transfer-name" style="color:#156097;">
-                <div>2/13</div>
+            <div class="transfer-name" style="color: rgb(209, 151, 8);">
+                <div>6</div>
                 <div class="line-label">号线</div>
             </div>
-            <a>西直门</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>新街口</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <a href="/service/line/station/641432779088860a952ad339.html">二里沟</a></div> <!---->
+        <div class="station"><a href="/service/line/station/5fed3154b17a37c682d20aad.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/5fed3154b17a37c682d20aad.html">甘家口</a></div> <!---->
+        <div class="station"><a href="/service/line/station/61ce494eb0972c463ee519cc.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/61ce494eb0972c463ee519cc.html">玉渊潭东门</a></div> <!---->
+        <div class="station"><a href="/service/line/station/63af74f69088860a952a7952.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/63af74f69088860a952a7952.html">木樨地</a></div> <!---->
+        <div class="station"><a href="/service/line/station/63af750b9088860a952a7954.html"
+                                class="circle"><i class="icofont-ui-rotation"></i></a>
             <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#d19708;"></div>
-                <div class="transfer-line" style="background-color:#d6abc1;"></div>
+                <div class="transfer-line" style="background-color: rgb(242, 193, 114);"></div>
             </div>
-            <div class="transfer-name" style="color:#d19708;">
-                <div>6/19</div>
-                <div class="line-label">号线</div>
-            </div>
-            <a>平安里</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>西四</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>灵境胡同</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-            <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#c23931;"></div>
-            </div>
-            <div class="transfer-name" style="color:#c23931;">
-                <div>1</div>
-                <div class="line-label">号线</div>
-            </div>
-            <a>西单</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-            <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#156097;"></div>
-            </div>
-            <div class="transfer-name" style="color:#156097;">
-                <div>2</div>
-                <div class="line-label">号线</div>
-            </div>
-            <a>宣武门</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
-            <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#f2c172;"></div>
-            </div>
-            <div class="transfer-name" style="color:#f2c172;">
+            <div class="transfer-name" style="color: rgb(242, 193, 114);">
                 <div>7</div>
                 <div class="line-label">号线</div>
             </div>
-            <a>菜市口</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>陶然亭</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <a href="/service/line/station/63af750b9088860a952a7954.html">达官营</a></div> <!---->
+        <div class="station"><a href="/service/line/station/63af754b9088860a952a7956.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/63af754b9088860a952a7956.html">红莲南路</a></div> <!---->
+        <div class="station"><a href="/service/line/station/63af75ae9088860a952a7959.html"
+                                class="circle"><i class="icofont-ui-rotation"></i></a>
             <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#D8B9B3;"></div>
+                <div class="transfer-line" style="background-color: rgb(228, 96, 34);"></div>
             </div>
-            <div class="transfer-name" style="color:#D8B9B3;">
-                <div>14</div>
-                <div class="line-label">号线</div>
+            <div class="transfer-name" style="color: rgb(228, 96, 34);">
+                <div>房山</div>
+                <div class="line-label">线</div>
             </div>
-            <a>北京南站</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>马家堡</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <a href="/service/line/station/63af75ae9088860a952a7959.html">东管头南</a></div> <!---->
+        <div class="station"><a href="/service/line/station/63af75d79088860a952a795b.html"
+                                class="circle"><i class="icofont-ui-rotation"></i></a>
             <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#009bc1;"></div>
+                <div class="transfer-line" style="background-color: rgb(0, 155, 193);"></div>
             </div>
-            <div class="transfer-name" style="color:#009bc1;">
+            <div class="transfer-name" style="color: rgb(0, 155, 193);">
                 <div>10</div>
                 <div class="line-label">号线</div>
             </div>
-            <a>角门西</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>公益西桥</a></div>
-        <div class="station"><a class="circle"><i class="icofont-ui-rotation"></i></a>
+            <a href="/service/line/station/63af75d79088860a952a795b.html">丰台站</a></div> <!---->
+        <div class="station"><a href="/service/line/station/63af75f69088860a952a795c.html"
+                                class="circle"><i class="icofont-ui-rotation"></i></a>
             <div class="transfer-wrapper">
-                <div class="transfer-line" style="background-color:#d6abc1;"></div>
+                <div class="transfer-line" style="background-color: rgb(146, 191, 30);"></div>
             </div>
-            <div class="transfer-name" style="color:#d6abc1;">
-                <div>19</div>
+            <div class="transfer-name" style="color: rgb(146, 191, 30);">
+                <div>9</div>
                 <div class="line-label">号线</div>
             </div>
-            <a>新宫</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>西红门</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>高米店北</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>高米店南</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>枣园</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>清源路</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>黄村西大街</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>黄村火车站</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>义和庄</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>生物医药基地</a></div>
-        <div class="station"><a class="circle"></a>
-            <a>天宫院</a></div>
+            <a href="/service/line/station/63af75f69088860a952a795c.html">丰台南路</a></div> <!---->
+        <div class="station"><a href="/service/line/station/63af76079088860a952a795d.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/63af76079088860a952a795d.html">富丰桥</a></div> <!---->
+        <div class="station"><a href="/service/line/station/63af76109088860a952a795e.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/63af76109088860a952a795e.html">看丹</a></div> <!---->
+        <div class="station"><a href="/service/line/station/63af761a9088860a952a795f.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/63af761a9088860a952a795f.html">榆树庄</a></div> <!---->
+        <div class="station"><a href="/service/line/station/658507a411244c4ae1b3a2cd.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/658507a411244c4ae1b3a2cd.html">洪泰庄</a></div> <!---->
+        <div class="station"><a href="/service/line/station/65895a3af7181b5a64729e2f.html"
+                                class="circle"><!----></a> <!----> <a
+                href="/service/line/station/65895a3af7181b5a64729e2f.html">宛平城</a></div> <!---->
     </div>
 </div>
-
 
 </body>
 </html>

@@ -19,7 +19,8 @@
     "node-fetch": "^3.3.2",
     "svg-pan-zoom": "^3.6.1",
     "vue": "^3.3.11",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
