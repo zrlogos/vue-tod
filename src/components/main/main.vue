@@ -1,14 +1,20 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header  >
+      <el-header>
         <el-menu
             :default-active="activeIndex"
             class="el-menu-demo"
             mode="horizontal"
             :ellipsis="false"
         >
-          <div class="flex-grow"/>
+          <el-menu-item index="0">
+            <img
+                style="width: 40px"
+                src="/subway.png"
+            />
+          </el-menu-item>
+
           <router-link class="nav-link" to="/about">
             <el-menu-item index="1">主页</el-menu-item>
           </router-link>
@@ -18,6 +24,11 @@
           <router-link class="nav-link" to="/line">
             <el-menu-item index="4">廊道TOD</el-menu-item>
           </router-link>
+
+          <div class="flex-grow" />
+          <el-menu-item index="5">
+            <el-avatar src="/people.png"></el-avatar>
+          </el-menu-item>
         </el-menu>
       </el-header>
       <el-main>
@@ -39,6 +50,10 @@
 
 
 <style>
+.flex-grow {
+  flex-grow: 1;
+}
+
 .nav-link {
   margin-right: 15px;
   text-decoration: none;
