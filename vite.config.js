@@ -9,4 +9,7 @@ export default defineConfig({
             '@': '/src'
         },
     },
+    build: {
+        target: 'es2020' // 将这里设置为你当前 Node.js 版本对应的 ECMAScript 版本
+    }
 });
