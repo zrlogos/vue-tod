@@ -42,7 +42,7 @@ export default {
 </template>
 
 
-<style>
+<style scoped>
 
 .container {
   display: flex;

@@ -11,6 +11,7 @@
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
     "@element-plus/icons-vue": "^2.3.1",
+    "@svgdotjs/svg.js": "^3.2.0",
     "axios": "^1.6.5",
     "csv-parser": "^3.0.0",
     "element-plus": "^2.6.0",
@@ -18,6 +19,7 @@
     "jquery": "^3.7.1",
     "node-fetch": "^3.3.2",
     "svg-pan-zoom": "^3.6.1",
+    "svg.js": "^2.7.1",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5",
     "vuex": "^4.0.2"
