@@ -160,9 +160,10 @@ const validateEmail = () => {
 const startReset = () => {
   formRef.value.validate((isValid) => {
     if (isValid) {
-      axios.post('/api/auth/start-reset', {
-        email: form.email,
-        code: form.code
+      axios.post('/api/auth/valid-reset-email', null, {
+        params: {
+          email: form.email
+        }
       })
           .then(() => {
             active.value++
@@ -177,21 +178,24 @@ const startReset = () => {
   })
 }
 
-const doReset = () => {
-  formRef.value.validate((isValid) => {
-    if (isValid) {
-      post('/api/auth/do-reset', {
+formRef.value.validate((isValid) => {
+  if (isValid) {
+    axios.post('/api/auth/do-reset', null, {
+      params: {
         password: form.password
-      }, (message) => {
-        ElMessage.success(message)
-        router.push('/')
-      })
-    } else {
-      ElMessage.warning('请填写新的密码')
-    }
-  })
-}
-
+      }
+    }).then((response) => {
+      const message = response.data.message
+      ElMessage.success(message)
+      router.push('/')
+    }).catch((error) => {
+      console.error(error)
+      ElMessage.error('重置密码失败，请重试')
+    })
+  } else {
+    ElMessage.warning('请填写新的密码')
+  }
+})
 </script>
 
 <style scoped>

@@ -44,7 +44,6 @@ import {reactive} from "vue";
 import {ElMessage} from "element-plus";
 import router from "@/router";
 import axios from 'axios' // 导入 axios 库
-
 import {useStore} from "vuex";
 
 const store = useStore()
@@ -59,21 +58,16 @@ const login = () => {
   if (!form.username || !form.password) {
     ElMessage.warning('请填写用户名和密码！')
   } else {
-    axios.post('/api/auth/login', {
-      username: form.username,
-      password: form.password,
-      remember: form.remember
+    axios.post('/api/auth/login', null, {
+      params: {
+        username: form.username,
+        password: form.password,
+        remember: form.remember
+      }
     })
         .then(response => {
           ElMessage.success(response.data.message)
-          axios.get('/api/user/me')
-              .then(response => {
-                store.auth.user = response.data
-                router.push('/index')
-              })
-              .catch(() => {
-                store.auth.user = null
-              })
+          router.push('/about')
         })
         .catch(error => {
           console.error(error)

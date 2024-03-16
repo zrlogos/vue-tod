@@ -142,10 +142,12 @@ const register = () => {
   formRef.value.validate((isValid) => {
     if (isValid) {
       axios.post('/api/auth/register', {
-        username: form.username,
-        password: form.password,
-        email: form.email,
-        code: form.code
+        params: {
+          username: form.username,
+          password: form.password,
+          email: form.email,
+          code: form.code
+        }
       })
           .then(response => {
             ElMessage.success(response.data.message)
@@ -164,7 +166,9 @@ const register = () => {
 const validateEmail = () => {
   coldTime.value = 60
   axios.post('/api/auth/valid-register-email', {
-    email: form.email
+    params: {
+      email: form.email
+    }
   })
       .then(response => {
         ElMessage.success(response.data.message)
