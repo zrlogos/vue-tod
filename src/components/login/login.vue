@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="butt">
-        <el-button type="primary" @click="nextPage"
+        <el-button type="primary" @click="login"
         >登录</el-button
         >
         <el-button class="shou" @click="register">注册</el-button>
@@ -46,8 +46,15 @@
 <script>
 
 
+import router from "@/router.js";
+import axios from "axios";
+
 export default {
   name: "login",
+  // 在 login 组件的 created 钩子中
+  created() {
+    localStorage.setItem('isLoggedIn', 'false');
+  },
   data() {
     return {
       form: {
@@ -74,6 +81,31 @@ export default {
     }
   },
   methods: {
+    login() {
+      axios.post('/api/auth/login', null, {
+        params: {
+          username: this.form.username,
+          password: this.form.password
+        }
+      })
+          .then(response => {
+            if (response.data.data==="true") {
+              // 登录成功,存储登录状态
+              console.log(response.data)
+              localStorage.setItem('isLoggedIn', 'true');
+              // 跳转到其他页面
+              router.push('/about')
+
+            } else {
+              // 登录失败,显示错误提示
+              alert(response.data.message);
+            }
+          })
+          .catch(error => {
+            console.error('登录请求出错', error);
+          });
+    },
+
     remenber(data){
       this.checked=data
       if(this.checked){
@@ -91,9 +123,9 @@ export default {
     },
     register() {},
 
-    nextPage(){
-      localStorage.setItem('isLoggedIn', true)
-      this.$router.push('/about')
+    nextPage() {
+      localStorage.setItem('isLoggedIn', 'true')
+      router.push('/about')
     }
   },
 };
