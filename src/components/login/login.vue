@@ -2,7 +2,7 @@
   <div class="loginbody">
     <div class="logindata">
       <div class="logintext">
-        <h2>北京地铁TOD</h2>
+        <h2>北京地铁 TOD</h2>
       </div>
       <div class="formdata">
         <el-form ref="form" :model="form" :rules="rules">
@@ -135,16 +135,16 @@ export default {
 .loginbody {
   width: 100%;
   height: 100%;
-  min-width: 1000px;
-  background-image: url("/login2.jpeg");
-  background-size: 100% 100%;
+  background-image: url("/transformed.jpeg");
+  background-size: cover; /* 或者使用 background-size: contain; */
   background-position: center center;
-  overflow: auto;
   background-repeat: no-repeat;
   position: fixed;
   line-height: 100%;
   padding-top: 150px;
+
 }
+
 
 .logintext {
   margin-bottom: 20px;
@@ -152,8 +152,8 @@ export default {
   text-align: center;
   font-size: 30px;
   font-weight: bolder;
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
+  color: #f6f6f6;
+  text-shadow: 2px 2px 4px #225569;
 }
 
 .logindata {
@@ -161,7 +161,9 @@ export default {
   height: 300px;
   transform: translate(-50%);
   margin-left: 50%;
+
 }
+
 
 .tool {
   display: flex;
