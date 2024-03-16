@@ -2,8 +2,8 @@
   <div>
     <div style="margin: 30px 20px">
       <el-steps :active="active" finish-status="success" align-center>
-        <el-step title="验证电子邮件"/>
-        <el-step title="重新设定密码"/>
+        <el-step title="验证电子邮件" />
+        <el-step title="重新设定密码" />
       </el-steps>
     </div>
     <transition name="el-fade-in-linear" mode="out-in">
@@ -17,9 +17,7 @@
             <el-form-item prop="email">
               <el-input v-model="form.email" type="email" placeholder="电子邮件地址">
                 <template #prefix>
-                  <el-icon>
-                    <Message/>
-                  </el-icon>
+                  <el-icon><Message /></el-icon>
                 </template>
               </el-input>
             </el-form-item>
@@ -28,16 +26,14 @@
                 <el-col :span="17">
                   <el-input v-model="form.code" :maxlength="6" type="text" placeholder="请输入验证码">
                     <template #prefix>
-                      <el-icon>
-                        <EditPen/>
-                      </el-icon>
+                      <el-icon><EditPen /></el-icon>
                     </template>
                   </el-input>
                 </el-col>
                 <el-col :span="5">
                   <el-button type="success" @click="validateEmail"
                              :disabled="!isEmailValid || coldTime > 0">
-                    {{ coldTime > 0 ? '请稍后 ' + coldTime + ' 秒' : '获取验证码' }}
+                    {{coldTime > 0 ? '请稍后 ' + coldTime + ' 秒' : '获取验证码'}}
                   </el-button>
                 </el-col>
               </el-row>
@@ -46,6 +42,8 @@
         </div>
         <div style="margin-top: 70px">
           <el-button @click="startReset()" style="width: 270px;" type="danger" plain>开始重置密码</el-button>
+          <el-button @click="router.push('/')" style="width: 270px; margin-top: 20px ;margin-right: 15px;
+        " type="primary" plain>返回登录</el-button>
         </div>
       </div>
     </transition>
@@ -60,18 +58,14 @@
             <el-form-item prop="password">
               <el-input v-model="form.password" :maxlength="16" type="password" placeholder="新密码">
                 <template #prefix>
-                  <el-icon>
-                    <Lock/>
-                  </el-icon>
+                  <el-icon><Lock /></el-icon>
                 </template>
               </el-input>
             </el-form-item>
             <el-form-item prop="password_repeat">
               <el-input v-model="form.password_repeat" :maxlength="16" type="password" placeholder="重复新密码">
                 <template #prefix>
-                  <el-icon>
-                    <Lock/>
-                  </el-icon>
+                  <el-icon><Lock /></el-icon>
                 </template>
               </el-input>
             </el-form-item>
@@ -79,6 +73,7 @@
         </div>
         <div style="margin-top: 70px">
           <el-button @click="doReset()" style="width: 270px;" type="danger" plain>立即重置密码</el-button>
+          <el-button @click="router.push('/')" width: 270px; type="danger" plain>返回登录</el-button>
         </div>
       </div>
     </transition>
@@ -87,10 +82,10 @@
 
 <script setup>
 import {reactive, ref} from "vue";
-
+import {EditPen, Lock, Message} from "@element-plus/icons-vue";
+import axios from "axios";
 import {ElMessage} from "element-plus";
 import router from "@/router";
-import axios from "axios";
 
 const active = ref(0)
 
@@ -138,64 +133,65 @@ const onValidate = (prop, isValid) => {
 }
 
 const validateEmail = () => {
-  coldTime.value = 60
-  axios.post('/api/auth/valid-reset-email', {
-    email: form.email
+  coldTime.value = 60;
+  axios.post('/api/auth/valid-reset-email', null, {
+    params: {
+      email: form.email
+    }
   })
-      .then(response => {
-        ElMessage.success(response.data.message)
-        const timer = setInterval(() => {
-          coldTime.value--
+      .then((response) => {
+        ElMessage.success(response.data);
+        const interval = setInterval(() => {
+          coldTime.value--;
           if (coldTime.value === 0) {
-            clearInterval(timer)
+            clearInterval(interval);
           }
-        }, 1000)
+        }, 1000);
       })
-      .catch(error => {
-        ElMessage.warning(error.response.data.message)
-        coldTime.value = 0
-      })
-}
+      .catch((error) => {
+        ElMessage.warning(error.response.data);
+        coldTime.value = 0;
+      });
+};
 
 const startReset = () => {
   formRef.value.validate((isValid) => {
     if (isValid) {
-      axios.post('/api/auth/valid-reset-email', null, {
-        params: {
-          email: form.email
-        }
+      axios.post('/api/auth/start-reset', {
+        email: form.email,
+        code: form.code
       })
           .then(() => {
-            active.value++
+            active.value++;
           })
-          .catch(error => {
-            console.error(error)
-            ElMessage.warning('重置密码失败,请稍后重试')
-          })
+          .catch((error) => {
+            ElMessage.warning(error.response.data);
+          });
     } else {
-      ElMessage.warning('请填写电子邮件地址和验证码')
+      ElMessage.warning('请填写电子邮件地址和验证码');
     }
-  })
-}
+  });
+};
 
-formRef.value.validate((isValid) => {
-  if (isValid) {
-    axios.post('/api/auth/do-reset', null, {
-      params: {
+const doReset = () => {
+  formRef.value.validate((isValid) => {
+    if (isValid) {
+      axios.post('/api/auth/do-reset', {
         password: form.password
-      }
-    }).then((response) => {
-      const message = response.data.message
-      ElMessage.success(message)
-      router.push('/')
-    }).catch((error) => {
-      console.error(error)
-      ElMessage.error('重置密码失败，请重试')
-    })
-  } else {
-    ElMessage.warning('请填写新的密码')
-  }
-})
+      })
+          .then((response) => {
+            ElMessage.success(response.data);
+            router.push('/');
+          })
+          .catch((error) => {
+            ElMessage.warning(error.response.data);
+          });
+    } else {
+      ElMessage.warning('请填写新的密码');
+    }
+  });
+};
+
 </script>
 
 <style scoped>

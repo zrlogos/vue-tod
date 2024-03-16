@@ -80,6 +80,8 @@ import {ElMessage} from "element-plus";
 import axios from "axios";
 
 
+import {Lock, User, Message,EditPen} from "@element-plus/icons-vue";
+
 const form = reactive({
   username: '',
   password: '',
@@ -141,7 +143,7 @@ const onValidate = (prop, isValid) => {
 const register = () => {
   formRef.value.validate((isValid) => {
     if (isValid) {
-      axios.post('/api/auth/register', {
+      axios.post('/api/auth/register', null, {
         params: {
           username: form.username,
           password: form.password,
@@ -165,7 +167,7 @@ const register = () => {
 
 const validateEmail = () => {
   coldTime.value = 60
-  axios.post('/api/auth/valid-register-email', {
+  axios.post('/api/auth/valid-register-email', null, {
     params: {
       email: form.email
     }
