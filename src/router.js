@@ -9,7 +9,7 @@ import point from '@/components/map/point.vue';
 import LoginPage from "@/components/login/sub/LoginPage.vue";
 import ForgetPage from "@/components/login/sub/ForgetPage.vue";
 import RegisterPage from "@/components/login/sub/RegisterPage.vue";
-
+import chat from "@/components/chat/chat.vue";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -23,7 +23,8 @@ const router = createRouter({
                 { path: '/about', component: about },
             ],
         },
-        { path: '/', redirect: '/login' },
+        { path: '/', redirect: '/chat' },
+        { path: '/chat', component:chat },
         { path: '/login', component: login,
             children: [
                 {

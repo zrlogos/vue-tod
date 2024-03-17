@@ -1,5 +1,5 @@
 // vite.config.js
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
@@ -10,6 +10,15 @@ export default defineConfig({
         },
     },
     build: {
-        target: 'es2020' // 将这里设置为你当前 Node.js 版本对应的 ECMAScript 版本
+        target: 'es2020'
+    },
+    server: {
+        proxy: {
+            '/api': {
+                target: 'https://burn.hair',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, '/v1')
+            }
+        }
     }
 });
