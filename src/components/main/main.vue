@@ -1,6 +1,6 @@
 <template>
   <div class="common-layout">
-    <el-container>
+    <el-container style="width: 100vw">
       <el-header>
         <el-menu
             :default-active="activeIndex"
@@ -25,7 +25,11 @@
             <el-menu-item index="4">廊道TOD</el-menu-item>
           </router-link>
 
-          <div class="flex-grow" />
+          <router-link class="nav-link" to="/chat">
+            <el-menu-item index="5">AI问答</el-menu-item>
+          </router-link>
+
+          <div class="flex-grow"/>
           <el-menu-item index="5">
             <el-avatar src="/people.png"></el-avatar>
           </el-menu-item>
@@ -50,6 +54,11 @@
 
 
 <style>
+.common-layout{
+  height: 100vh;
+
+}
+
 .flex-grow {
   flex-grow: 1;
 }

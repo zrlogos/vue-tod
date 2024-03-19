@@ -31,8 +31,9 @@
         <el-link @click="router.push('/forget')">忘记密码？</el-link>
       </el-col>
     </el-row>
-    <div style="margin-top: 40px">
+    <div style="margin-top: 40px;display: flex">
       <el-button @click="login()" style="width: 270px" type="success" plain>立即登录</el-button>
+      <el-button @click="router.push('/main')" style="width: 270px; "  plain>游客登录</el-button>
     </div>
     <el-divider>
       <span style="color: grey;font-size: 13px">没有账号</span>

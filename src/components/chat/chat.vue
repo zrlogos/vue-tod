@@ -1,14 +1,21 @@
 <template>
-  <el-container class="common-layout">
-    <el-main>
-      <el-scrollbar ref="scrollbar" max-height="600px" always>
-        <div ref="innerRef">
+  <el-container class="outer-box">
+    <el-main style="height: 65vh">
+      <div v-if="showLogo">
+
+      </div>
+
+      <el-scrollbar ref="scrollbar" max-height="600px" always class="content">
+        <div ref="innerRef" style="margin: auto">
           <div v-for="(item, index) in messageList" :key="index" class="dialog">
             <el-avatar :src="item.avatar"/>
             <p>{{ item.message }}</p>
           </div>
         </div>
       </el-scrollbar>
+
+
+
     </el-main>
     <el-footer>
       <div class="input-container">
@@ -16,15 +23,18 @@
             v-model="inputValue"
             :autosize="{ minRows: 1, maxRows: 8 }"
             type="textarea"
-            placeholder="Please input"
-            style="width: 700px; margin-right: 25px; border-color: #C0C4CC; border-radius: 50px;"
+            placeholder="询问我一些关于TOD的知识吧"
+            style="width: 700px; margin-right: 25px; border-color: #C0C4CC; border-radius: 20%;
+            font-size: large;
+          "
         ></el-input>
-        <el-button type="success" :icon="Top" circle @click="sendMessage"></el-button>
+        <el-button type="success" :icon="Top" circle @click="sendMessage"
+                   style="height: 2.3rem ;width :2.3rem ;font-size: large;"
+        ></el-button>
       </div>
     </el-footer>
   </el-container>
 </template>
-
 <script>
 import {ref} from 'vue'
 import axios from 'axios';
@@ -40,9 +50,12 @@ export default {
   watch: {
     messageList: {
       handler(newValue, oldValue) {
-        this.$refs.scrollbar.scrollTo({
-          top: this.$refs.innerRef.scrollHeight,
-          behavior: 'smooth'
+        console.log("changed")
+        this.$nextTick(() => {
+          this.$refs.scrollbar.scrollTo({
+            top: this.$refs.innerRef.scrollHeight + 100,
+            behavior: 'smooth'
+          });
         });
       },
       deep: true // 深度监听，可以监听对象内部属性的变化
@@ -53,16 +66,14 @@ export default {
   setup() {
     const inputValue = ref('');
     const messageList = ref([]);
-    const inner = null;
-    const scrollbar = null;
-
-
+    const inner = ref('innerRef')
     const sendMessage = async () => {
       if (inputValue.value.trim() !== '') {
         messageList.value.push({
           avatar: '/user.jpg',
           message: inputValue.value,
         });
+        inputValue.value = ''
 
 
         try {
@@ -102,6 +113,7 @@ export default {
               message: 'Request timed out. Please try again.',
             });
 
+
           } else {
             console.error('Error sending message:', error);
             messageList.value.push({
@@ -124,14 +136,20 @@ export default {
 
 </script>
 
-<style>
-.common-layout {
+<style scoped>
+
+
+.outer-box {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   position: relative;
-  margin-left: 20%;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 800px;
+  height: 85vh;
+  font-size: large;
+
+
 }
 
 
@@ -143,9 +161,8 @@ export default {
   display: flex;
   align-items: flex-end;
   width: 100%;
-  padding: 0 20px;
   box-sizing: border-box;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .dialog {
@@ -153,42 +170,5 @@ export default {
 }
 
 
-.el-textarea {
-
-
-  .el-textarea__inner::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
-  }
-
-  /*滚动条的轨道*/
-
-  .el-textarea__inner::-webkit-scrollbar-track {
-    background-color: #ffffff;
-  }
-
-  /*滚动条里面的小方块，能向上向下移动*/
-
-  .el-textarea__inner::-webkit-scrollbar-thumb {
-    background-color: rgba(144, 147, 153, 0.3);
-    border-radius: 5px;
-    border: 1px solid #f1f1f1;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .el-textarea__inner::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(144, 147, 153, 0.3);
-  }
-
-  .el-textarea__inner::-webkit-scrollbar-thumb:active {
-    background-color: rgba(144, 147, 153, 0.3);
-  }
-
-  /*边角，即两个滚动条的交汇处*/
-
-  .el-textarea__inner::-webkit-scrollbar-corner {
-    background-color: #ffffff;
-  }
-}
-
 </style>
+

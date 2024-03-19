@@ -21,10 +21,11 @@ const router = createRouter({
                 { path: '/beijing-subway', component: BeijingSubway },
                 { path: '/line', component: line },
                 { path: '/about', component: about },
+                { path: '/chat', component:chat },
             ],
         },
-        { path: '/', redirect: '/chat' },
-        { path: '/chat', component:chat },
+        { path: '/', redirect: '/login' },
+
         { path: '/login', component: login,
             children: [
                 {
