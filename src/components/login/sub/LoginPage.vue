@@ -1,7 +1,11 @@
 <template>
   <div style="text-align: center;margin: 0 20px">
-    <div style="margin-top: 150px">
-      <div style="font-size: 25px;font-weight: bold">登录</div>
+    <div style="margin-top: 70px">
+      <el-image style="width: 30%;height: 30%" fit="cover"
+                src="/bjtu.png"/>
+      <div style="font-size: 22px;font-weight: bold;margin-top: 30px">登录</div>
+
+
     </div>
     <div style="margin-top: 50px">
       <el-input v-model="form.username" type="text" placeholder="用户名/邮箱">
@@ -45,7 +49,7 @@ import {ElMessage} from "element-plus";
 import router from "@/router";
 import axios from 'axios' // 导入 axios 库
 import {useStore} from "vuex";
-import {Lock, User} from "@element-plus/icons";
+
 const store = useStore()
 
 const form = reactive({
