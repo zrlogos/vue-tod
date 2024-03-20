@@ -12,13 +12,4 @@ export default defineConfig({
     build: {
         target: 'es2020'
     },
-    server: {
-        proxy: {
-            '/api': {
-                target: 'https://burn.hair',
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/api/, '/v1')
-            }
-        }
-    }
 });

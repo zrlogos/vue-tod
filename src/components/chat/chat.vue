@@ -1,11 +1,22 @@
 <template>
-  <el-container class="outer-box">
-    <el-main style="height: 65vh">
-      <div v-if="showLogo">
-
+  <div class="outer-box">
+      <div v-if="showLogo" style="display: flex; flex-direction: column; align-items: center; margin-top: 20%">
+        <el-image style="width: 4rem; height: 4rem; margin-bottom: 5rem;" fit="cover" src="/gpt.png"/>
+        <div class="prompt" style="display: flex; flex-wrap: wrap; justify-content: center;
+            font-size: medium;
+          ">
+          <el-card
+              v-for="(card, index) in cards"
+              :key="index"
+              style="max-width: 480px; width: 45%; margin: 10px;"
+              shadow="hover"
+              @click="handleClick(card)"
+          >
+            {{ card }}
+          </el-card>
+        </div>
       </div>
-
-      <el-scrollbar ref="scrollbar" max-height="600px" always class="content">
+      <el-scrollbar v-else ref="scrollbar" max-height="600px" always>
         <div ref="innerRef" style="margin: auto">
           <div v-for="(item, index) in messageList" :key="index" class="dialog">
             <el-avatar :src="item.avatar"/>
@@ -13,11 +24,6 @@
           </div>
         </div>
       </el-scrollbar>
-
-
-
-    </el-main>
-    <el-footer>
       <div class="input-container">
         <el-input
             v-model="inputValue"
@@ -28,12 +34,11 @@
             font-size: large;
           "
         ></el-input>
-        <el-button type="success" :icon="Top" circle @click="sendMessage"
+        <el-button type="success" :icon="Top" circle @click="handleInput"
                    style="height: 2.3rem ;width :2.3rem ;font-size: large;"
         ></el-button>
       </div>
-    </el-footer>
-  </el-container>
+  </div>
 </template>
 <script>
 import {ref} from 'vue'
@@ -46,6 +51,12 @@ export default {
       return Top
     }
   },
+  methods: {
+    handleClick(content) {
+      this.sendRequest(content)
+    }
+  },
+
 
   watch: {
     messageList: {
@@ -61,75 +72,89 @@ export default {
       deep: true // 深度监听，可以监听对象内部属性的变化
     }
   },
+  data() {
+    return {
+      cards: [
+        '什么是Transit-oriented development（TOD）？它如何影响城市规划和发展？',
+        'TOD在全球范围内的应用情况如何？是否有一些成功的案例可以参考？',
+        'TOD是如何与公共交通系统相关联的？它与传统城市规划有何不同？',
+        'TOD的历史是什么样的？它是如何发展演变至今的？'
+      ]
+    }
+  },
 
 
   setup() {
     const inputValue = ref('');
     const messageList = ref([]);
     const inner = ref('innerRef')
-    const sendMessage = async () => {
+    const showLogo = ref(true)
+
+    const handleInput = () => {
       if (inputValue.value.trim() !== '') {
-        messageList.value.push({
-          avatar: '/user.jpg',
-          message: inputValue.value,
-        });
-        inputValue.value = ''
+        sendRequest(inputValue.value)
+      }
+    };
 
+    const sendRequest = async (content) => {
 
-        try {
-          const response = await axios.post(
-              '/123api/chat/completions',
-              {
-                model: 'gpt-3.5-turbo',
-                messages: [
-                  {
-                    role: 'user',
-                    content: inputValue.value,
-                  },
-                ],
-                temperature: 0.7,
-              },
-              {
-                headers: {
-                  Authorization: 'Bearer sk-Ae0qvreDskQ3N2Ev51Fd83E2E2F94c36A58a7202Dd26AdB0',
+      showLogo.value = false;
+      inputValue.value = '';
+      messageList.value.push({
+        avatar: '/user.jpg',
+        message: content,
+      });
+      try {
+        const response = await axios.post(
+            'https://burn.hair/v1/chat/completions',
+            {
+              model: 'gpt-3.5-turbo',
+              messages: [
+                {
+                  role: 'user',
+                  content: content,
                 },
-                timeout: 10000, // 设置超时时间为 10 秒
-              }
-          );
+              ],
+              temperature: 0.7,
+            },
+            {
+              headers: {
+                Authorization: 'Bearer sk-Ae0qvreDskQ3N2Ev51Fd83E2E2F94c36A58a7202Dd26AdB0',
+              },
+              timeout: 10000, // 设置超时时间为 10 秒
+            }
+        );
 
-          // 处理 API 响应
-          const assistantMessage = response.data.choices[0].message.content;
+        // 处理 API 响应
+        const assistantMessage = response.data.choices[0].message.content;
+        messageList.value.push({
+          avatar: '/gpt.png',
+          message: assistantMessage,
+        });
+      } catch (error) {
+        if (error.code === 'ECONNABORTED') {
+          // 请求超时的错误处理
           messageList.value.push({
-            avatar: '@/assets/gpt.png',
-            message: assistantMessage,
+            avatar: '/gpt.png',
+            message: 'Request timed out. Please try again.',
           });
-          inputValue.value = '';
-
-        } catch (error) {
-          if (error.code === 'ECONNABORTED') {
-            // 请求超时的错误处理
-            messageList.value.push({
-              avatar: '/gpt.png',
-              message: 'Request timed out. Please try again.',
-            });
-
-
-          } else {
-            console.error('Error sending message:', error);
-            messageList.value.push({
-              avatar: '/gpt.png',
-              message: 'An error occurred. Please try again.',
-            });
-
-          }
+        } else {
+          console.error('Error sending message:', error);
+          messageList.value.push({
+            avatar: '/gpt.png',
+            message: 'An error occurred. Please try again.',
+          });
         }
       }
     };
+
     return {
       inputValue,
       messageList,
-      sendMessage,
+      handleInput,
+      sendRequest,
       inner,
+      showLogo,
     };
   }
 }
@@ -149,7 +174,6 @@ export default {
   height: 85vh;
   font-size: large;
 
-
 }
 
 
@@ -165,9 +189,7 @@ export default {
   margin-bottom: 20px;
 }
 
-.dialog {
-  max-width: 60%;
-}
+
 
 
 </style>

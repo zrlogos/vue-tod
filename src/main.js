@@ -6,7 +6,7 @@ import 'element-plus/dist/index.css'
 import store from './store'
 import axios from 'axios';
 
-// 配置 Axios
+
 
 axios.defaults.withCredentials = true; // 允许发送 Cookie
 

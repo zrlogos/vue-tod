@@ -2,8 +2,8 @@
   <div>
     <div style="margin: 30px 20px">
       <el-steps :active="active" finish-status="success" align-center>
-        <el-step title="验证电子邮件" />
-        <el-step title="重新设定密码" />
+        <el-step title="验证电子邮件"/>
+        <el-step title="重新设定密码"/>
       </el-steps>
     </div>
     <transition name="el-fade-in-linear" mode="out-in">
@@ -17,7 +17,9 @@
             <el-form-item prop="email">
               <el-input v-model="form.email" type="email" placeholder="电子邮件地址">
                 <template #prefix>
-                  <el-icon><Message /></el-icon>
+                  <el-icon>
+                    <Message/>
+                  </el-icon>
                 </template>
               </el-input>
             </el-form-item>
@@ -26,14 +28,16 @@
                 <el-col :span="17">
                   <el-input v-model="form.code" :maxlength="6" type="text" placeholder="请输入验证码">
                     <template #prefix>
-                      <el-icon><EditPen /></el-icon>
+                      <el-icon>
+                        <EditPen/>
+                      </el-icon>
                     </template>
                   </el-input>
                 </el-col>
                 <el-col :span="5">
                   <el-button type="success" @click="validateEmail"
                              :disabled="!isEmailValid || coldTime > 0">
-                    {{coldTime > 0 ? '请稍后 ' + coldTime + ' 秒' : '获取验证码'}}
+                    {{ coldTime > 0 ? '请稍后 ' + coldTime + ' 秒' : '获取验证码' }}
                   </el-button>
                 </el-col>
               </el-row>
@@ -43,7 +47,8 @@
         <div style="margin-top: 70px">
           <el-button @click="startReset()" style="width: 270px;" type="danger" plain>开始重置密码</el-button>
           <el-button @click="router.push('/')" style="width: 270px; margin-top: 20px ;margin-right: 15px;
-        " type="primary" plain>返回登录</el-button>
+        " type="primary" plain>返回登录
+          </el-button>
         </div>
       </div>
     </transition>
@@ -58,14 +63,18 @@
             <el-form-item prop="password">
               <el-input v-model="form.password" :maxlength="16" type="password" placeholder="新密码">
                 <template #prefix>
-                  <el-icon><Lock /></el-icon>
+                  <el-icon>
+                    <Lock/>
+                  </el-icon>
                 </template>
               </el-input>
             </el-form-item>
             <el-form-item prop="password_repeat">
               <el-input v-model="form.password_repeat" :maxlength="16" type="password" placeholder="重复新密码">
                 <template #prefix>
-                  <el-icon><Lock /></el-icon>
+                  <el-icon>
+                    <Lock/>
+                  </el-icon>
                 </template>
               </el-input>
             </el-form-item>
@@ -82,7 +91,6 @@
 
 <script setup>
 import {reactive, ref} from "vue";
-import {EditPen, Lock, Message} from "@element-plus/icons-vue";
 import axios from "axios";
 import {ElMessage} from "element-plus";
 import router from "@/router";
