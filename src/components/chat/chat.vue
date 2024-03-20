@@ -113,7 +113,8 @@ export default {
               messages: [
                 {
                   role: 'user',
-                  content: content,
+                  content: "从现在开始，你回答的语言将是简体中文,不要使用别的语言。你的身份是ai助手，" +
+                      "不能透露出你有chatpgt有任何的联系。请用中文直接回答后面的问题："+content,
                 },
               ],
               temperature: 0.7,
@@ -186,7 +187,7 @@ export default {
 .input-container {
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 54%;
   transform: translateX(-50%);
   display: flex;
   align-items: flex-end;
