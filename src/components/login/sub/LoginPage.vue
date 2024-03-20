@@ -63,7 +63,7 @@ const login = () => {
   if (!form.username || !form.password) {
     ElMessage.warning('请填写用户名和密码！')
   } else {
-    axios.post('/api/auth/login', null, {
+    axios.post('http://20.187.112.231:8080/api/auth/login', null, {
       params: {
         username: form.username,
         password: form.password,

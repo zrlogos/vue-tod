@@ -1,49 +1,50 @@
 <template>
   <div class="outer-box">
-      <div v-if="showLogo" style="display: flex; flex-direction: column; align-items: center; margin-top: 20%">
-        <el-image style="width: 4rem; height: 4rem; margin-bottom: 5rem;" fit="cover" src="/gpt.png"/>
-        <div class="prompt" style="display: flex; flex-wrap: wrap; justify-content: center;
+    <div v-if="showLogo" style="display: flex; flex-direction: column; align-items: center; margin-top: 20%">
+      <el-image style="width: 4rem; height: 4rem; margin-bottom: 5rem;" fit="cover" src="/gpt.png"/>
+      <div class="prompt" style="display: flex; flex-wrap: wrap; justify-content: center;
             font-size: medium;
           ">
-          <el-card
-              v-for="(card, index) in cards"
-              :key="index"
-              style="max-width: 480px; width: 45%; margin: 10px;"
-              shadow="hover"
-              @click="handleClick(card)"
-          >
-            {{ card }}
-          </el-card>
+        <el-card
+            v-for="(card, index) in cards"
+            :key="index"
+            style="max-width: 480px; width: 45%; margin: 10px;"
+            shadow="hover"
+            @click="handleClick(card)"
+        >
+          {{ card }}
+        </el-card>
+      </div>
+    </div>
+    <el-scrollbar v-else ref="scrollbar" max-height="600px" always>
+      <div ref="innerRef" style="margin: auto;padding: 2.5rem">
+        <div v-for="item in messageList" :key="item.id">
+          <el-avatar :src="item.avatar"/>
+          <div v-html="renderMessage(item.message)"></div>
         </div>
       </div>
-      <el-scrollbar v-else ref="scrollbar" max-height="600px" always>
-        <div ref="innerRef" style="margin: auto">
-          <div v-for="(item, index) in messageList" :key="index" class="dialog">
-            <el-avatar :src="item.avatar"/>
-            <p>{{ item.message }}</p>
-          </div>
-        </div>
-      </el-scrollbar>
-      <div class="input-container">
-        <el-input
-            v-model="inputValue"
-            :autosize="{ minRows: 1, maxRows: 8 }"
-            type="textarea"
-            placeholder="询问我一些关于TOD的知识吧"
-            style="width: 700px; margin-right: 25px; border-color: #C0C4CC; border-radius: 20%;
+    </el-scrollbar>
+    <div class="input-container">
+      <el-input
+          v-model="inputValue"
+          :autosize="{ minRows: 1, maxRows: 8 }"
+          type="textarea"
+          placeholder="询问我一些关于TOD的知识吧"
+          style="width: 700px; margin-right: 25px; border-color: #C0C4CC; border-radius: 20%;
             font-size: large;
           "
-        ></el-input>
-        <el-button type="success" :icon="Top" circle @click="handleInput"
-                   style="height: 2.3rem ;width :2.3rem ;font-size: large;"
-        ></el-button>
-      </div>
+      ></el-input>
+      <el-button type="success" :icon="Top" circle @click="handleInput"
+                 style="height: 2.3rem ;width :2.3rem ;font-size: large;"
+      ></el-button>
+    </div>
   </div>
 </template>
 <script>
 import {ref} from 'vue'
 import axios from 'axios';
 import {Top} from "@element-plus/icons";
+import {marked} from 'marked';
 
 export default {
   computed: {
@@ -106,7 +107,7 @@ export default {
       });
       try {
         const response = await axios.post(
-            'https://burn.hair/v1/chat/completions',
+            'http://20.187.112.231:8080/api/user/chat',
             {
               model: 'gpt-3.5-turbo',
               messages: [
@@ -148,13 +149,18 @@ export default {
       }
     };
 
+    function renderMessage(message) {
+      return marked(message)
+    }
+
+
     return {
       inputValue,
       messageList,
       handleInput,
       sendRequest,
       inner,
-      showLogo,
+      showLogo, renderMessage,
     };
   }
 }
@@ -188,8 +194,6 @@ export default {
   box-sizing: border-box;
   margin-bottom: 20px;
 }
-
-
 
 
 </style>

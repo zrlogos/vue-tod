@@ -142,7 +142,7 @@ const onValidate = (prop, isValid) => {
 
 const validateEmail = () => {
   coldTime.value = 60;
-  axios.post('/api/auth/valid-reset-email', null, {
+  axios.post('http://20.187.112.231:8080/api/auth/valid-reset-email', null, {
     params: {
       email: form.email
     }
@@ -165,7 +165,7 @@ const validateEmail = () => {
 const startReset = () => {
   formRef.value.validate((isValid) => {
     if (isValid) {
-      axios.post('/api/auth/start-reset', {
+      axios.post('http://20.187.112.231:8080/api/auth/start-reset', {
         email: form.email,
         code: form.code
       })
@@ -184,7 +184,7 @@ const startReset = () => {
 const doReset = () => {
   formRef.value.validate((isValid) => {
     if (isValid) {
-      axios.post('/api/auth/do-reset', {
+      axios.post('http://20.187.112.231:8080/api/auth/do-reset', {
         password: form.password
       })
           .then((response) => {

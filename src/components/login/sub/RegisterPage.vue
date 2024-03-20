@@ -143,7 +143,7 @@ const onValidate = (prop, isValid) => {
 const register = () => {
   formRef.value.validate((isValid) => {
     if (isValid) {
-      axios.post('/api/auth/register', null, {
+      axios.post('http://20.187.112.231:8080/api/auth/register', null, {
         params: {
           username: form.username,
           password: form.password,
@@ -167,7 +167,7 @@ const register = () => {
 
 const validateEmail = () => {
   coldTime.value = 60
-  axios.post('/api/auth/valid-register-email', null, {
+  axios.post('http://20.187.112.231:8080/api/auth/valid-register-email', null, {
     params: {
       email: form.email
     }
