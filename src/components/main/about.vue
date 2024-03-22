@@ -64,8 +64,8 @@
 
                   <div class="bl-feature">
                     <ul class="feature-blog-list d-flex">
-                      <li><img src="/md-img-1.jpg" alt="personal portfolio"></li>
-                      <li><img src="/md-img-2.jpg" alt="personal portfolio"></li>
+                      <li><img src="/md1.jpg" style="object-fit: contain; max-width: 300px; max-height: 300px;" alt="review"></li>
+                      <li><img src="/md2.jpg" style="object-fit: contain; max-width: 300px; max-height: 300px;" alt="review"></li>
                     </ul>
                   </div>
 
@@ -119,12 +119,12 @@
                       <div class="content">
                         <div class="address">
                           <p><a href="#">21231303@bjtu.edu.cn</a></p>
-                          <p><a href="#">+012 3344 556677</a></p>
+                          <p><a href="#">21231299@bjtu.edu.cn</a></p>
+                          <p><a href="#">21231292@bjtu.edu.cn</a></p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- Start Single Wedget -->
                   <div class="col-lg-6 col-md-6">
                     <div class="footer-widget footer-right quicklink">
                       <h3 class="ft-title">Quick Link</h3>
@@ -132,7 +132,6 @@
                         <ul class="quick-link">
                           <li><a href="https://www.bjtu.edu.cn/">北京交通大学</a></li>
                           <li><a href="https://www.bjsubway.com">北京地铁</a></li>
-                          <li><a href="#">Services</a></li>
                         </ul>
                       </div>
                     </div>
@@ -144,23 +143,8 @@
           </div>
         </div>
       </div>
-      <div class="copyright">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-              <div class="copyright-inner">
-                <p>2024 </p>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-              <div class="copyright-right text-center text-md-right">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </footer>
-    <!--// Footer -->
+
 
   </div>
 </template>
@@ -169,7 +153,7 @@
 
 </script>
 
-<style scoped >
+<style scoped>
 
 @import "@/assets/style.css";
 
