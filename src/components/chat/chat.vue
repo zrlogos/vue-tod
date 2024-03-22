@@ -107,22 +107,11 @@ export default {
       });
       try {
         const response = await axios.post(
-            'http://20.187.112.231:8080/api/user/chat',
+            'https://api.yueyueyu.one/api/gpt',
             {
-              model: 'gpt-3.5-turbo',
-              messages: [
-                {
-                  role: 'user',
-                  content: "从现在开始，你回答的语言将是简体中文,不要使用别的语言。你的身份是ai助手，" +
-                      "不能透露出你有chatpgt有任何的联系。请用中文直接回答后面的问题："+content,
-                },
-              ],
-              temperature: 0.7,
+              text: content,
             },
             {
-              headers: {
-                Authorization: 'Bearer sk-Ae0qvreDskQ3N2Ev51Fd83E2E2F94c36A58a7202Dd26AdB0',
-              },
               timeout: 10000, // 设置超时时间为 10 秒
             }
         );

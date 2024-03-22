@@ -30,7 +30,7 @@
           </router-link>
 
           <div class="flex-grow"/>
-          <el-menu-item index="5">
+          <el-menu-item index="6">
             <el-avatar src="/people.png"></el-avatar>
           </el-menu-item>
         </el-menu>
