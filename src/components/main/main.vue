@@ -56,7 +56,7 @@
 <style>
 .common-layout{
   height: 100vh;
-
+  overflow-x: hidden;
 }
 
 .flex-grow {
