@@ -27,6 +27,19 @@ const sortMethodForS6 = createSortMethod('s6');
 const sortMethodForS7 = createSortMethod('s7');
 const sortMethodForS8 = createSortMethod('s8');
 
+function sortMethodForS9(a, b): number {
+  const numA = parseFloat(a.s9.replace('%', ''));
+  const numB = parseFloat(b.s9.replace('%', ''));
+  if (numA < numB) {
+    return -1;
+  } else if (numA > numB) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+
 const searchValue = ref('')
 const filterTableData = computed(() =>
     tableData.filter(
@@ -460,174 +473,63 @@ const tableData = [
   }
 ];
 
-function filterHandler(value: any, row: any, column: any) {
-  const property = column.property;
-  const cellValue = row[property];
-  return cellValue > 0.5;
-}
 
-function getCellStyleS1(value) {
-  if (value > 3.6) {
-    return {
-      color: '#33bd8e',
-    };
-  } else if (value > 2.7) {
-    return {
-      color: '#335fbd',
-    };
-  } else {
-    return {
-
-      color: '#bd3333',
-    };
-  }
+function createFilterHandler(columnName, start, end) {
+  return function (value, row) {
+    const cellValue = row[columnName]; // 使用动态的列名
+    switch (value) {
+      case 'lt':
+        return cellValue < start;
+      case 'between':
+        return cellValue >= start && cellValue <= end;
+      case 'gt':
+        return cellValue > end;
+      default:
+        return true; // 如果没有匹配的过滤器，我们默认显示所有行
+    }
+  };
 }
 
 
-function getCellStyleS2(value) {
-  if (value > 1) {
-    return {
-
-      color: '#33bd8e',
-    };
-  } else if (value > 0.8) {
-    return {
-
-      color: '#335fbd',
-    };
-  } else {
-    return {
-
-      color: '#bd3333',
-    };
-  }
+// 使用工厂函数创建不同的筛选函数
+const filterHandler1 = createFilterHandler('s1', 2.7, 3.6);
+const filterHandler2 = createFilterHandler('s2', 0.8, 1);
+const filterHandler3 = createFilterHandler('s3', 5, 7);
+const filterHandler4 = createFilterHandler('s4', 50, 100);
+const filterHandler5 = createFilterHandler('s5', 0.6, 0.8);
+const filterHandler6 = createFilterHandler('s6', 0.5, 0.75);
+const filterHandler7 = createFilterHandler('s7', 0.8, 1);
+const filterHandler8 = createFilterHandler('s8', 0.06, 0.08);
+const filterHandler9 = createFilterHandler('s9', '3%', '5%');
+function createGetCellStyle(threshold1, threshold2) {
+  return function getCellStyle(value) {
+    if (value > threshold1) {
+      return {
+        color: '#33bd8e',
+      };
+    } else if (value > threshold2) {
+      return {
+        color: '#335fbd',
+      };
+    } else {
+      return {
+        color: '#bd3333',
+      };
+    }
+  };
 }
 
 
-function getCellStyleS3(value) {
-  if (value > 7) {
-    return {
+const getCellStyleS1 = createGetCellStyle(3.6, 2.7);
+const getCellStyleS2 = createGetCellStyle(1, 0.8);
+const getCellStyleS3 = createGetCellStyle(7, 5);
+const getCellStyleS4 = createGetCellStyle(100, 50);
+const getCellStyleS5 = createGetCellStyle(0.8, 0.6);
+const getCellStyleS6 = createGetCellStyle(0.75, 0.5);
+const getCellStyleS7 = createGetCellStyle(1, 0.8);
+const getCellStyleS8 = createGetCellStyle(0.08, 0.06);
+const getCellStyleS9 = createGetCellStyle('5%', '3%');
 
-      color: '#33bd8e',
-    };
-  } else if (value > 5) {
-    return {
-
-      color: '#335fbd',
-    };
-  } else {
-    return {
-
-      color: '#bd3333',
-    };
-  }
-}
-
-
-function getCellStyleS4(value) {
-  if (value > 100) {
-    return {
-
-      color: '#33bd8e',
-    };
-  } else if (value > 50) {
-    return {
-
-      color: '#335fbd',
-    };
-  } else {
-    return {
-
-      color: '#bd3333',
-    };
-  }
-}
-
-
-function getCellStyleS5(value) {
-  if (value > 0.8) {
-    return {
-      color: '#33bd8e',
-    };
-  } else if (value > 0.6) {
-    return {
-      color: '#335fbd',
-    };
-  } else {
-    return {
-      color: '#bd3333',
-    };
-  }
-}
-
-function getCellStyleS6(value) {
-  if (value > 0.75) {
-    return {
-      color: '#33bd8e',
-
-    };
-  } else if (value > 0.5) {
-    return {
-      color: '#335fbd',
-
-    };
-  } else {
-    return {
-      color: '#bd3333',
-    };
-  }
-}
-
-function getCellStyleS7(value) {
-  if (value > 1) {
-    return {
-
-      color: '#33bd8e',
-    };
-  } else if (value > 0.8) {
-    return {
-
-      color: '#335fbd',
-    };
-  } else {
-    return {
-
-      color: '#bd3333',
-    };
-  }
-}
-
-function getCellStyleS8(value) {
-  if (value > 0.08) {
-    return {
-      color: '#33bd8e',
-    };
-  } else if (value > 0.06) {
-    return {
-      color: '#335fbd',
-    };
-  } else {
-    return {
-      color: '#bd3333',
-    };
-  }
-}
-
-function getCellStyleS9(value) {
-  if (value > '5%') {
-    return {
-      color: '#33bd8e',
-    };
-  } else if (value > '3%') {
-    return {
-      color: '#335fbd',
-    };
-  } else {
-    return {
-      color: '#bd3333',
-    };
-  }
-}
 
 
 </script>
@@ -651,9 +553,14 @@ function getCellStyleS9(value) {
           sortable
           :sort-method="sortMethodForS1"
           width="100"
-          :filters="[{ text: '大于 0.5', value: 'gt0.5' }]"
-          :filter-method="filterHandler"
+          :filters="[
+              { text: '优秀', value: 'gt' },
+              { text: '良好', value: 'between' },
+              { text: '较差', value: 'lt' },
+          ]"
+          :filter-method="filterHandler1"
       >
+
         <template v-slot:default="scope">
           <div :style="getCellStyleS1(scope.row.s1)">
             {{ scope.row.s1 }}
@@ -667,8 +574,12 @@ function getCellStyleS9(value) {
           sortable
           :sort-method="sortMethodForS2"
           width="100"
-          :filters="[{ text: '大于 0.5', value: 'gt0.5' }]"
-          :filter-method="filterHandler"
+          :filters="[
+            { text: '优秀', value: 'gt' },
+              { text: '良好', value: 'between' },
+              { text: '较差', value: 'lt' },
+            ]"
+          :filter-method="filterHandler2"
       >
         <template v-slot:default="scope">
           <div :style="getCellStyleS2(scope.row.s2)">
@@ -684,8 +595,12 @@ function getCellStyleS9(value) {
           sortable
           :sort-method="sortMethodForS3"
           width="100"
-          :filters="[{ text: '大于 0.5', value: 'gt0.5' }]"
-          :filter-method="filterHandler"
+          :filters="[
+              { text: '优秀', value: 'gt' },
+              { text: '良好', value: 'between' },
+              { text: '较差', value: 'lt' },
+          ]"
+          :filter-method="filterHandler3"
       >
         <template v-slot:default="scope">
           <div :style="getCellStyleS3(scope.row.s3)">
@@ -701,8 +616,12 @@ function getCellStyleS9(value) {
           sortable
           :sort-method="sortMethodForS4"
           width="100"
-          :filters="[{ text: '大于 0.5', value: 'gt0.5' }]"
-          :filter-method="filterHandler"
+          :filters="[
+              { text: '优秀', value: 'gt' },
+              { text: '良好', value: 'between' },
+              { text: '较差', value: 'lt' },
+          ]"
+          :filter-method="filterHandler4"
       >
         <template v-slot:default="scope">
           <div :style="getCellStyleS4(scope.row.s4)">
@@ -718,8 +637,12 @@ function getCellStyleS9(value) {
           sortable
           :sort-method="sortMethodForS5"
           width="100"
-          :filters="[{ text: '大于 0.5', value: 'gt0.5' }]"
-          :filter-method="filterHandler"
+          :filters="[
+              { text: '优秀', value: 'gt' },
+              { text: '良好', value: 'between' },
+              { text: '较差', value: 'lt' },
+          ]"
+          :filter-method="filterHandler5"
       >
         <template v-slot:default="scope">
           <div :style="getCellStyleS5(scope.row.s5)">
@@ -734,8 +657,12 @@ function getCellStyleS9(value) {
           sortable
           :sort-method="sortMethodForS6"
           width="100"
-          :filters="[{ text: '大于 0.5', value: 'gt0.5' }]"
-          :filter-method="filterHandler"
+          :filters="[
+              { text: '优秀', value: 'gt' },
+              { text: '良好', value: 'between' },
+              { text: '较差', value: 'lt' },
+          ]"
+          :filter-method="filterHandler6"
       >
         <template v-slot:default="scope">
           <div :style="getCellStyleS6(scope.row.s6)">
@@ -751,8 +678,12 @@ function getCellStyleS9(value) {
           sortable
           :sort-method="sortMethodForS7"
           width="100"
-          :filters="[{ text: '大于 0.5', value: 'gt0.5' }]"
-          :filter-method="filterHandler"
+          :filters="[
+              { text: '优秀', value: 'gt' },
+              { text: '良好', value: 'between' },
+              { text: '较差', value: 'lt' },
+          ]"
+          :filter-method="filterHandler7"
       >
         <template v-slot:default="scope">
           <div :style="getCellStyleS7(scope.row.s7)">
@@ -768,8 +699,12 @@ function getCellStyleS9(value) {
           sortable
           :sort-method="sortMethodForS8"
           width="100"
-          :filters="[{ text: '大于 0.5', value: 'gt0.5' }]"
-          :filter-method="filterHandler"
+          :filters="[
+              { text: '优秀', value: 'gt' },
+              { text: '良好', value: 'between' },
+              { text: '较差', value: 'lt' },
+          ]"
+          :filter-method="filterHandler8"
       >
         <template v-slot:default="scope">
           <div :style="getCellStyleS8(scope.row.s8)">
@@ -784,8 +719,13 @@ function getCellStyleS9(value) {
           label="商业用地密度"
           sortable
           width="100"
-          :filters="[{ text: '大于 0.5', value: 'gt0.5' }]"
-          :filter-method="filterHandler"
+          :filters="[
+              { text: '优秀', value: 'gt' },
+              { text: '良好', value: 'between' },
+              { text: '较差', value: 'lt' },
+          ]"
+          :filter-method="filterHandler9"
+          :sort-method="sortMethodForS9"
       >
         <template v-slot:default="scope">
           <div :style="getCellStyleS9(scope.row.s9)">
