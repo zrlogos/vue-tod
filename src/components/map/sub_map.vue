@@ -11,14 +11,20 @@ export default {
       stationInfoStyle: {
         position: 'absolute',
         left: '0',
-        top: '0'
-      }
+        top: '0',
+
+
+      },
+      getInfoData: {},
     };
   },
 
   mounted() {
     this.loadXML();
+    this.loadJson().then(() => {
+    });
   },
+
   methods: {
     loadXML() {
       // 使用 fetch 加载 XML 文件
@@ -129,8 +135,8 @@ export default {
         }
       }
     },
+
     handleStationClick(event) {
-      console.log("1")
       const stationName = event.target.getAttribute('sdata');
       const rect = event.target.getBoundingClientRect();
       const offsetX = rect.left + window.pageXOffset;
@@ -139,13 +145,45 @@ export default {
       this.stationInfoStyle.left = offsetX + 'px';
       this.stationInfoStyle.top = offsetY + 'px';
       this.stationInfoStyle.width = '380px';
-      this.stationInfoStyle.height = '200px'
+      this.stationInfoStyle.height = '250px'
       this.showStationInfo = true;
-
     },
 
+    loadJson() {
+      return fetch('/getInfo.json')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            this.getInfoData = data;
+          })
+          .catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+          });
+    },
     getStationInfo(stationName) {
+      const stationData = this.getInfoData[stationName];
+
+
+      if (stationData) {
+        const { s1, s2, s3, s4, s5, s6, s7, s8, s9 } = stationData;
+        return `人均教育用地面积: ${s1}<br>
+                                公共服务设施供需比: ${s2}<br>
+                                站点交叉口密度: ${s3}<br>
+                                平均交通换乘距离: ${s4}<br>
+                                人均医疗用地面积: ${s5}<br>
+                                功能混合度: ${s6}<br>
+                                产业建筑总面积/住宅密度: ${s7}<br>
+                                交通设施用地密度: ${s8}<br>
+                                商业用地密度: ${s9}`;
+      } else {
+        return '暂无信息';
+      }
     },
+
   }
 
 
@@ -172,13 +210,13 @@ export default {
       @mouseenter.native="showStationInfo = true"
       @mouseleave.native="showStationInfo = false"
   >
-
-    <!-- Body content -->
     <h3>{{ stationName }}</h3>
-    <div class="card-content">
-      {{ getStationInfo(stationName) }}
-    </div>
+    <div class="card-content"
+         v-html="getStationInfo(stationName)"
 
+         style="font-size: 0.9rem;
+         color:#454649   "
+    ></div>
   </el-card>
 
 
