@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted } from "vue";
+import {onMounted, onUnmounted} from "vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
 
 let map = null;
@@ -18,9 +18,6 @@ onMounted(() => {
           center: [116.397428, 39.90923], // 初始化地图中心点位置
         });
       })
-      .catch((e) => {
-        console.log(e);
-      });
 });
 
 onUnmounted(() => {

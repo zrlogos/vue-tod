@@ -3,6 +3,7 @@ import {Back, Right, Search} from "@element-plus/icons";
 import $ from 'jquery';
 import intro from "./intro.vue"
 import tod_line from "@/components/line/tod_line.vue";
+import heat from "@/components/amap/heat.vue"
 
 export default {
   name: "fourth",
@@ -10,6 +11,7 @@ export default {
   components: {
     intro,
     tod_line,
+    heat,
   },
 
   computed: {
@@ -110,7 +112,7 @@ export default {
 
   methods: {
 
-    changeColor(){
+    changeColor() {
       for (let i = 0; i < this.tods[this.index].length; i++) {
         let stationName = this.tods[this.index][i];
         $("div.station:contains('" + stationName + "') a").css('color', 'red');
@@ -135,9 +137,8 @@ export default {
       console.log(minValues)
 
 
-
       for (let i = 0; i < 9; i++) {
-        this.percents[i] =100* (this.scores[this.index][i]-minValues[i])/(maxValues[i]-minValues[i])
+        this.percents[i] = 100 * (this.scores[this.index][i] - minValues[i]) / (maxValues[i] - minValues[i])
         this.todValues[i] = this.scores[this.index][i]
       }
     },
@@ -232,8 +233,9 @@ export default {
             <el-button type="primary" color="#009693" size="large" :icon="Search" circle @click="drawer = true">
             </el-button>
           </el-tooltip>
-          <el-drawer v-model="drawer" :with-header="false">
-            <span>廊道TOD</span>
+          <el-drawer v-model="drawer" :with-header="false" size="55%">
+            <span>热力图</span>
+            <heat/>
           </el-drawer>
         </div>
       </template>
@@ -407,7 +409,7 @@ a {
 }
 
 .demo-progress .custom-content {
-
+  color: #de8d8d;
   font-size: medium;
   font-weight: bolder;
   font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;

@@ -7,7 +7,7 @@ import point from '@/components/map/point.vue';
 import LoginPage from "@/components/login/sub/LoginPage.vue";
 import ForgetPage from "@/components/login/sub/ForgetPage.vue";
 import RegisterPage from "@/components/login/sub/RegisterPage.vue";
-import amap from "@/components/amap/MapContainer.vue";
+import heat from "@/components/amap/heat.vue";
 import chat from "@/components/chat/chat.vue";
 const router = createRouter({
     history: createWebHistory(),
@@ -23,8 +23,8 @@ const router = createRouter({
                 { path: '/chat', component:chat },
             ],
         },
+        {path:'/map',component:heat},
         { path: '/', redirect: '/login' },
-        {path: '/test', component:amap},
         { path: '/login', component: login,
             children: [
                 {

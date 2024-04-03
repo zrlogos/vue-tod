@@ -30,6 +30,11 @@
 import {Right} from "@element-plus/icons";
 
 export default {
+  mounted() {
+    if (window.innerWidth < 768) {
+      this.$toast.info('未适配移动端，请使用PC端打开');
+    }
+  },
   computed: {
     Right() {
       return Right

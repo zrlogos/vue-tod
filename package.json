@@ -22,8 +22,10 @@
     "node-fetch": "^3.3.2",
     "svg-pan-zoom": "^3.6.1",
     "svg.js": "^2.7.1",
+    "vant": "^4.8.8",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5",
+    "vue-toastification": "^1.7.14",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
