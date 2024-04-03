@@ -29,18 +29,8 @@ export default {
   data() {
     return {
       drawer: false,
-      percentage1: 0,
-      percentage2: 0,
-      percentage3: 0,
-      percentage4: 0,
-      percentage5: 0,
-      percentage6: 0,
-      percentage7: 0,
-      percentage8: 0,
-      percentage9: 0,
-
-      percents:[0,0,0,0,0,0,0,0,0],
-
+      percents: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      todValues: [0, 0, 0, 0, 0, 0, 0, 0, 0],
       tods: [
         ["安河桥北", "北宫门", "西苑",],
         ["圆明园", "北京大学东门", "中关村",],
@@ -55,8 +45,6 @@ export default {
         ["黄村西大街", "黄村火车站", "义和庄",],
         ["生物医药基地", "天宫院"]
       ],
-
-
 
 
       scores: [
@@ -122,42 +110,44 @@ export default {
 
   methods: {
 
-    changePercent(){
-      this.percentage1 = this.scores[this.index][0]
-      this.percentage2 = this.scores[this.index][1]
-      this.percentage3 = this.scores[this.index][2]
-      this.percentage4 = this.scores[this.index][3]
-      this.percentage5 = this.scores[this.index][4]
-      this.percentage6 = this.scores[this.index][5]
-      this.percentage7 = this.scores[this.index][6]
-      this.percentage8 = this.scores[this.index][7]
-      this.percentage9 = this.scores[this.index][8]
-
-
-
-
-
-
-
-    },
-
-    handleNext() {
-      $("div.station a").css('color', '');
-      $("div.station a.circle").css('background-color', '');
-      this.index = (this.index + 1) % this.tods.length
+    changeColor(){
       for (let i = 0; i < this.tods[this.index].length; i++) {
         let stationName = this.tods[this.index][i];
         $("div.station:contains('" + stationName + "') a").css('color', 'red');
         $("div.station:contains('" + stationName + "') a.circle").css('background-color', 'rgb(255,192,203)');
 
       }
+    },
+
+    changePercent() {
+      const numCols = this.scores[0].length;
+      const maxValues = Array(numCols).fill(Number.NEGATIVE_INFINITY);
+      const minValues = Array(numCols).fill(Number.POSITIVE_INFINITY);
+
+      for (let col = 0; col < numCols; col++) {
+        for (let row = 0; row < this.scores.length; row++) {
+          const value = this.scores[row][col];
+          maxValues[col] = Math.max(maxValues[col], value);
+          minValues[col] = Math.min(minValues[col], value);
+        }
+      }
+      console.log(maxValues)
+      console.log(minValues)
+
+
+
+      for (let i = 0; i < 9; i++) {
+        this.percents[i] =100* (this.scores[this.index][i]-minValues[i])/(maxValues[i]-minValues[i])
+        this.todValues[i] = this.scores[this.index][i]
+      }
+    },
+
+    handleNext() {
+      $("div.station a").css('color', '');
+      $("div.station a.circle").css('background-color', '');
+      this.index = (this.index + 1) % this.tods.length
+      this.changeColor();
       this.changePercent();
-
-
-
-
-
-
 
     },
 
@@ -166,24 +156,12 @@ export default {
 
       $("div.station a").css('color', '');
       $("div.station a.circle").css('background-color', '');
-      if (this.index >= 0) this.index--
-
-      if (this.index === -1) {
-        this.percentage1 = 0
-        this.percentage2 = 0
-        this.percentage3 = 0
-        this.percentage4 = 0
-      } else {
-        for (let i = 0; i < this.tods[this.index].length; i++) {
-          let stationName = this.tods[this.index][i];
-          $("div.station:contains('" + stationName + "') a").css('color', 'red');
-          $("div.station:contains('" + stationName + "') a.circle").css('background-color', 'rgb(255,192,203)');
-
-
-        }
-        this.changePercent();
+      if (this.index <= 0) {
+        this.index = this.tods.length
       }
-
+      this.index--
+      this.changePercent();
+      this.changeColor();
 
     },
 
@@ -200,46 +178,46 @@ export default {
     <el-card style="width: 800px;margin-left: 30px ">
       <template #default>
         <div class="demo-progress">
-          <el-progress :percentage="percentage1" :stroke-width="24" :color="'#225569'" striped striped-flow
+          <el-progress :percentage="percents[0]" :stroke-width="24" :color="'#225569'" striped striped-flow
                        text-inside
           >
-            <span class="custom-content">&nbsp &nbsp 人均教育用地面积:  {{ percentage1 }}</span>
+            <span class="custom-content">&nbsp &nbsp 人均教育用地面积:  {{ todValues[0] }}</span>
           </el-progress>
-          <el-progress :percentage="percentage2" :stroke-width="24" :color="'#16d995'" text-inside striped strip
+          <el-progress :percentage="percents[1]" :stroke-width="24" :color="'#16d995'" text-inside striped strip
                        ed-flow>
-            <span class="custom-content">&nbsp &nbsp   公共服务设施供需比:  {{ percentage2 }}</span>
+            <span class="custom-content">&nbsp &nbsp   公共服务设施供需比:  {{ todValues[1] }}</span>
           </el-progress>
-          <el-progress :percentage="percentage3" :stroke-width="24"
+          <el-progress :percentage="percents[2]" :stroke-width="24"
                        :color="'#b516d9'" striped striped-flow
                        text-inside
           >
-            <span class="custom-content"> &nbsp  &nbsp 交叉口密度:  {{ percentage3 }}</span>
+            <span class="custom-content"> &nbsp  &nbsp 交叉口密度:  {{ todValues[2] }}</span>
           </el-progress>
-          <el-progress :percentage="percentage4" :stroke-width="24" text-inside
+          <el-progress :percentage="percents[3]" :stroke-width="24" text-inside
                        :color="'#335fbd'" striped striped-flow>
-            <span class="custom-content"> &nbsp &nbsp 交通换乘距离(单位：m):  {{ percentage4 }}</span>
+            <span class="custom-content"> &nbsp &nbsp 交通换乘距离(单位：m):  {{ todValues[3] }}</span>
           </el-progress>
 
-          <el-progress :percentage="percentage5" :stroke-width="24" :color="'#1d3432'"
+          <el-progress :percentage="percents[4]" :stroke-width="24" :color="'#1d3432'"
                        text-inside striped striped-flow>
-            <span class="custom-content"> &nbsp &nbsp   人均医疗用地面积（单位：m^2）:  {{ percentage1 }}</span>
+            <span class="custom-content"> &nbsp &nbsp   人均医疗用地面积（单位：m^2）:  {{ todValues[4] }}</span>
           </el-progress>
-          <el-progress :percentage="percentage6" :stroke-width="24"
+          <el-progress :percentage="percents[5]" :stroke-width="24"
                        text-inside :color="'#ffc0cb'" striped striped-flow>
-            <span class="custom-content">&nbsp &nbsp   功能混合度:  {{ percentage2 }}</span>
+            <span class="custom-content">&nbsp &nbsp   功能混合度:  {{ todValues[5] }}</span>
           </el-progress>
-          <el-progress :percentage="percentage7" :stroke-width="24"
+          <el-progress :percentage="percents[6]" :stroke-width="24"
                        text-inside :color="'#9a6c27'" striped striped-flow>
-            <span class="custom-content"> &nbsp  &nbsp 职住比:  {{ percentage3 }}</span>
+            <span class="custom-content"> &nbsp  &nbsp 职住比:  {{ todValues[6] }}</span>
           </el-progress>
-          <el-progress :percentage="percentage8" :stroke-width="24"
+          <el-progress :percentage="percents[7]" :stroke-width="24"
                        text-inside :color="'#4a5a7c'" striped striped-flow>
-            <span class="custom-content"> &nbsp &nbsp 交通设施比:  {{ percentage4 }}</span>
+            <span class="custom-content"> &nbsp &nbsp 交通设施比:  {{ todValues[7] }}</span>
           </el-progress>
 
-          <el-progress :percentage="percentage9" :stroke-width="24"
+          <el-progress :percentage="percents[8]" :stroke-width="24"
                        text-inside :color="'#565454'" striped striped-flow>
-            <span class="custom-content"> &nbsp &nbsp	商业用地密度: {{ percentage4 }}</span>
+            <span class="custom-content"> &nbsp &nbsp	商业用地密度: {{ todValues[8] }}</span>
           </el-progress>
         </div>
 
